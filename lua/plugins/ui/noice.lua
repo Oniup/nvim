@@ -73,6 +73,13 @@ return {
                 filter = { event = "msg_show", find = "^%[nvim%-treesitter%]" },
                 skip = true,
             },
+            {
+                filter = {
+                    event = "notify",
+                    find = "warning: multiple different client offset_encodings detected for buffer, this is not supported yet",
+                },
+                skip = true,
+            },
         },
         views = {
             mini = {
