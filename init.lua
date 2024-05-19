@@ -1,6 +1,4 @@
 local u = require("core.utils")
-local ui = require("core.ui")
-local icons = require("core.icons")
 
 -- Load vim options
 u.load_options(require("core.options"))
@@ -25,11 +23,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Load plugins
-require("lazy").setup(
-    {
-        { import = "plugins.core" },
-        { import = "plugins.lsp" },
-        { import = "plugins.ui" },
-    },
-    require("core.lazy_opts")
-)
+require("lazy").setup({
+    { import = "plugins.core" },
+    { import = "plugins.lsp" },
+    { import = "plugins.ui" },
+    { import = "plugins.qol" },
+}, require("core.lazy_opts"))

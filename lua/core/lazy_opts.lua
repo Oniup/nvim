@@ -1,6 +1,3 @@
-local ui = require("core.ui")
-local icons = require("core.icons")
-
 return {
     defaults = {
         lazy = true,
@@ -21,9 +18,9 @@ return {
         cmd = "git",
     },
     ui = {
-        border = ui.border.type,
+        border = require("core.ui").border.style,
         size = { width = 0.6, height = 0.6 },
-        icons = icons.lazy,
+        icons = require("core.icons").lazy,
         pills = true,
     },
     profiling = {

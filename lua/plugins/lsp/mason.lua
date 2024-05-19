@@ -3,11 +3,13 @@ local function update_repository()
         -- Language servers
         "lua-language-server",
         "vim-language-server",
+        "cmake-language-server",
         "json-lsp",
         "clangd",
         -- Formatters
         "stylua",
         "clang-format",
+        "cmakelang",
         -- Debug servers
         "codelldb",
     }

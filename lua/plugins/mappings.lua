@@ -1,12 +1,15 @@
 local map = vim.keymap.set
 local opts = require("core.utils").mapping_opts
 
-local function file_explorer()
+local function nvim_tree()
     map("n", "<leader>e", "<CMD> NvimTreeToggle <CR>", opts("Toggle file explorer split"))
 end
 
-local function fuzzy_finder()
+local function telescope()
     map("n", "<leader>fi", "<CMD> Telescope find_files <CR>", opts("Find Files"))
+    map("n", "<leader>fg", "<CMD> Telescope live_grep <CR>", opts("Project live grep"))
+    map("n", "<leader>fh", "<CMD> Telescope help_tags <CR>", opts("Find vim help tag"))
+    map("n", "<leader>fa", "<CMD> Telescope builtin <CR>", opts("All telescope builtin functions"))
     map(
         "n",
         "<leader>fl",
@@ -19,9 +22,6 @@ local function fuzzy_finder()
         "<CMD> Telescope current_buffer_fuzzy_find <CR>",
         opts("Find in current buf")
     )
-    map("n", "<leader>fg", "<CMD> Telescope live_grep <CR>", opts("Project live grep"))
-    map("n", "<leader>fh", "<CMD> Telescope help_tags <CR>", opts("Find vim help tag"))
-    map("n", "<leader>fa", "<CMD> Telescope builtin <CR>", opts("All telescope builtin functions"))
 end
 
 local function buffer_bar()
@@ -65,21 +65,21 @@ local function dap()
 
     -- Telescope dap menus
     map("n", "<leader>dm", "<CMD> Telescope dap commands <CR>", opts("Show jap commands"))
+    map("n", "<leader>jl", "<CMD> Telescope dap variables <CR>", opts("Show dap variables"))
+    map("n", "<leader>df", "<CMD> Telescope dap frames <CR>", opts("Show dap frames"))
     map(
         "n",
         "<leader>dc",
         "<CMD> Telescope dap configurations <CR>",
         opts("Show dap configurations")
     )
-    map("n", "<leader>jl", "<CMD> Telescope dap variables <CR>", opts("Show dap variables"))
-    map("n", "<leader>df", "<CMD> Telescope dap frames <CR>", opts("Show dap frames"))
 end
 
 local M = {}
 
 function M.load_mappings()
-    file_explorer()
-    fuzzy_finder()
+    nvim_tree()
+    telescope()
     buffer_bar()
     toggle_terminal()
     dap()
@@ -97,17 +97,17 @@ function M.lsp_load_buf_mappings(client, bufnr)
     map("n", "gr", "<cmd> Telescope lsp_references <cr>", lsp_opts("List references"))
     map("n", "gl", vim.diagnostic.open_float, lsp_opts("Open diagnostics hover info"))
     map("n", "K", vim.lsp.buf.hover, lsp_opts("Open hover info"))
+    map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("Format file"))
+    map("n", "<leader>ca", vim.lsp.buf.code_action, lsp_opts("Code actions"))
+    map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("Rename"))
+    map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("Go to next diagnostic"))
+    map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("Go to prev diagnostic"))
     map(
         "n",
         "<leader>di",
         "<cmd> Telescope diagnostics <cr>",
         lsp_opts("See all diagnostics in bufnrfer")
     )
-    map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("Format file"))
-    map("n", "<leader>ca", vim.lsp.buf.code_action, lsp_opts("Code actions"))
-    map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("Rename"))
-    map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("Go to next diagnostic"))
-    map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("Go to prev diagnostic"))
 
     if client == "clangd" then
         map(
