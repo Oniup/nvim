@@ -30,8 +30,6 @@ local menu_names = {
 }
 
 local function popup_fmt(entry, item)
-    local cmp = require("cmp")
-
     local insert = table.insert
     local concat = table.concat
     local fmt = {
@@ -81,8 +79,9 @@ u.lazy_load_plugin_on_file_open("nvim-cmp")
 return {
     "hrsh7th/nvim-cmp",
     dependencies = {
+        "neovim/nvim-lspconfig",
         "L3MON4D3/LuaSnip",
-        "lspconfig",
+
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",

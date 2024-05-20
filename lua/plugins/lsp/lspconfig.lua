@@ -31,7 +31,8 @@ local function create_client_opts(server)
             client.server_capabilities.documentFormattingProvider = false
             client.server_capabilities.documentRangeFormattingProvider = false
 
-            vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+            -- vim.api.nvim_set_option_value(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+            vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
             require("plugins.mappings").lsp_load_buf_mappings(client, bufnr)
         end,
     }
@@ -59,14 +60,13 @@ local function ui_set_diagnostics()
     vim.diagnostic.config(ui.lsp)
 end
 
-require("core.utils").lazy_load_plugin_on_file_open("lspconfig")
+require("core.utils").lazy_load_plugin_on_file_open("nvim-lspconfig")
 return {
     "neovim/nvim-lspconfig",
-    name = "lspconfig",
     dependencies = {
-        "null_ls",
-        "dressing",
-        "mason",
+        "stevearc/dressing.nvim",
+        "nvimtools/none-ls.nvim",
+        "williamboman/mason.nvim",
     },
     config = function()
         require("mason-lspconfig").setup_handlers({

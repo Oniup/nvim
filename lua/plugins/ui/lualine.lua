@@ -73,7 +73,7 @@ return {
     lazy = false,
     opts = {
         options = {
-            theme = require("ignite.lualine_theme"),
+            theme = require("core.utils").prequire("ignite.lualine_theme"),
             component_separators = { right = "", left = "" },
             section_separators = { right = "", left = "" },
         },

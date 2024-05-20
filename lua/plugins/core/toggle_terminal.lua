@@ -28,6 +28,6 @@ end
 
 return {
     "akinsho/toggleterm.nvim",
-    cmd = "ToggleTerm",
+    cmd = { "ToggleTerm" },
     opts = opts,
 }

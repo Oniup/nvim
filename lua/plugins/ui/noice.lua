@@ -47,11 +47,35 @@ return {
                 help = { pattern = "^:%s*he?l?p?%s+", icon = cmdline_icons.help },
             },
         },
+        messages = {
+            enabled = true,
+            view = "notify",
+            view_error = "notify",
+            view_warn = "notify",
+            view_history = "messages",
+            view_search = "virtualtext",
+        },
         lsp = {
             override = {
                 ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                 ["vim.lsp.util.stylize_markdown"] = true,
                 ["cmp.entry.get_documentation"] = true,
+            },
+            signature = {
+                enabled = true,
+                auto_open = { enabled = true },
+            },
+            hover = {
+                enabled = true,
+            },
+            documentation = {
+                view = "hover",
+                opts = {
+                    lang = "markdown",
+                    replace = true,
+                    format = { "{message}" },
+                    win_options = { concealcursor = "n", conceallevel = 3 },
+                },
             },
         },
         routes = {
@@ -81,16 +105,21 @@ return {
                 skip = true,
             },
         },
+        markdown = {
+            highlights = {
+                ["|%S-|"] = "@text.reference",
+                ["@%S+"] = "@parameter",
+                ["{%S-}"] = "@parameter",
+                ["^%s*(Return:)"] = "@text.title",
+                ["^%s*(See also:)"] = "@text.title",
+                ["^%s*(Parameters:)"] = "@text.title",
+            },
+        },
         views = {
             mini = {
-                timeout = 3500,
-                zindex = 10, -- lower, so it does not cover nvim-notify
-                position = { col = -3 }, -- to the left to avoid collision with scrollbar
-            },
-            hover = {
-                border = { style = ui.border.style },
-                size = { max_width = 80 },
-                win_options = { scrolloff = 4, wrap = true },
+                timeout = 5000,
+                zindex = 100,
+                -- position = { col = -3 }, -- to the left to avoid collision with scrollbar
             },
             popup = {
                 border = { style = ui.border.style },

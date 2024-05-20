@@ -1,6 +1,5 @@
 return {
     "nvim-treesitter/nvim-treesitter",
-    name = "treesitter",
     build = ":TSUpdate",
     lazy = false,
     config = function()
@@ -9,6 +8,7 @@ return {
                 "lua",
                 "vimdoc",
                 "vim",
+                "c", "cpp",
                 "markdown",
                 "markdown_inline",
             },

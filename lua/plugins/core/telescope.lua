@@ -16,24 +16,15 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "burntsushi/ripgrep",
-        "devicons",
-        "plenary",
-        "popup",
+        "nvim-tree/nvim-web-devicons",
+        "nvim-lua/plenary.nvim",
+        "nvim-lua/popup.nvim",
     },
     cmd = { "Telescope" },
     config = function()
         local actions = require("telescope.actions")
         require("telescope").setup({
             defaults = {
-                vimgrep_arguments = {
-                    "rg",
-                    "--color=never",
-                    "--no-heading",
-                    "--with-filename",
-                    "--line-number",
-                    "--column",
-                    "--smart-case",
-                },
                 initial_mode = "insert",
                 selection_strategy = "reset",
                 prompt_prefix = " " .. icons.noice.cmdline.search .. "  ",
@@ -59,12 +50,8 @@ return {
                     "dependencies",
                     "thirdparty",
                     "third_party",
+                    "tests",
                 },
-                file_sorter = require("telescope.sorters").get_fuzzy_file,
-                generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-                file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-                grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-                qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
                 path_display = { "truncate" },
                 mappings = {
                     i = {

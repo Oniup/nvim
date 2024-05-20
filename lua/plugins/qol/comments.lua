@@ -32,4 +32,5 @@ return {
             desc = "Comment toggle blockwise (visual)",
         },
     },
+    config = true,
 }

@@ -1,8 +1,7 @@
 return {
     "mfussenegger/nvim-dap",
-    name = "dap",
     dependencies = {
-        "mason",
+        "williamboman/mason.nvim",
         "jay-babu/mason-nvim-dap.nvim",
     },
     cmd = {

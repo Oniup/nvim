@@ -19,9 +19,8 @@ end
 
 return {
     "rcarriga/nvim-dap-ui",
-    name = "dapui",
     dependencies = {
-        "dap",
+        "mfussenegger/nvim-dap",
         "nvim-neotest/nvim-nio",
         "nvim-telescope/telescope-dap.nvim",
         "rcarriga/cmp-dap",

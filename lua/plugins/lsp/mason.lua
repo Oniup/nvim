@@ -29,18 +29,20 @@ end
 
 return {
     "williamboman/mason.nvim",
-    name = "mason",
+    cmd = { "Mason", "MasonUpdate" },
     dependencies = {
-        "lspconfig",
-        "devicons",
+        "neovim/nvim-lspconfig",
+        "nvim-tree/nvim-web-devicons",
         "williamboman/mason-lspconfig.nvim",
     },
     config = function()
         require("mason").setup({
-            icons = require("core.icons").mason,
-            border = require("core.ui").border.style,
-            width = 0.6,
-            height = 0.6,
+            ui = {
+                icons = require("core.icons").mason,
+                border = require("core.ui").border.style,
+                width = 0.6,
+                height = 0.6,
+            },
         })
         require("mason-lspconfig").setup()
         update_repository()

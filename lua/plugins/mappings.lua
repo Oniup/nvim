@@ -109,7 +109,7 @@ function M.lsp_load_buf_mappings(client, bufnr)
         lsp_opts("See all diagnostics in bufnrfer")
     )
 
-    if client == "clangd" then
+    if client.name == "clangd" then
         map(
             "n",
             "<leader>o",
