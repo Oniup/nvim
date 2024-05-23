@@ -124,7 +124,7 @@ return {
                 { name = "codeium" },
                 { name = "copilot" },
                 { name = "buffer" },
-                -- { name = "luasnip" },
+                { name = "luasnip" },
                 { name = "path" },
                 { name = "calc" },
                 { name = "emoji" },

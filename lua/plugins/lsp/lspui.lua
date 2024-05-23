@@ -52,7 +52,7 @@ return {
                 -- require('hover.providers.jira')
             end,
             preview_opts = {
-                border = require("core.ui").border.style,
+                border = ui.border.style,
             },
             preview_window = false,
             title = true,
