@@ -46,15 +46,14 @@ M.mason = {
     package_uninstalled = M.loading.uncompleted,
 }
 
-M.fidget = {
-    done = M.loading.completed,
-    spinner = M.loading_spinner,
-    icon_separator = " ",
-    group_separator = "---",
+M.seporators = {
+    horizontal = "---",
+    vertical = "▎",
+    centered_vertical = "│",
 }
 
 M.barbar = {
-    separator = { left = "▎", right = "" },
+    separator = { left = M.seporators.default, right = "" },
     close = M.task.unchecked,
     modified = M.task.dot_unchecked,
     present = "default", -- default', 'powerline', or 'slanted'
@@ -126,12 +125,12 @@ M.diagnostics = {
 }
 
 M.gitsigns = {
-    add = { text = "│" },
-    change = { text = "│" },
+    add = { text = M.seporators.centered_vertical },
+    change = { text = M.seporators.centered_vertical },
     delete = { text = "_" },
     topdelete = { text = "‾" },
-    changedelete = { text = "│" },
-    untracked = { text = "│" },
+    changedelete = { text = M.seporators.centered_vertical },
+    untracked = { text = M.seporators.centered_vertical },
 }
 
 M.nvim_tree_glyphs = {

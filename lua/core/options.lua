@@ -7,7 +7,7 @@ local M = {
     laststatus = 2,
     showmode = false,
 
-    conceallevel = 2,
+    conceallevel = 3,
 
     clipboard = "unnamedplus",
     belloff = "all",
@@ -34,8 +34,8 @@ local M = {
     list = true, -- Show white spaces
 
     inccommand = "split", -- Line preview of :s results
-    incsearch = true, -- Do incremental search
-    ignorecase = true, -- Ignore case in search
+    incsearch = false, -- Do incremental search
+    ignorecase = false, -- Ignore case in search
 
     termguicolors = true, -- Use 24bit colors
     synmaxcol = 200, -- Don't bother syntax highlighting long lines
@@ -65,7 +65,6 @@ M.listchars = {
     nbsp = "⦸",
     extends = "»",
     precedes = "«",
-    conceal = M.conceallevel,
     trail = "•",
 }
 

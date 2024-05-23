@@ -39,27 +39,27 @@ return {
             },
         },
     },
-    {
-        "lewis6991/hover.nvim",
-        name = "hover",
-        opts = {
-            init = function()
-                require("hover.providers.lsp")
-                require("hover.providers.dap")
-                require("hover.providers.gh") -- Github: Issues and PR's
-                require("hover.providers.gh_user") -- Github: Users
-                require("hover.providers.dictionary")
-                -- require('hover.providers.jira')
-            end,
-            preview_opts = {
-                border = ui.border.style,
-            },
-            preview_window = false,
-            title = true,
-            mouse_providers = {
-                "LSP",
-            },
-            mouse_delay = 500,
-        },
-    },
+    -- {
+    --     "lewis6991/hover.nvim",
+    --     name = "hover",
+    --     opts = {
+    --         init = function()
+    --             require("hover.providers.lsp")
+    --             require("hover.providers.dap")
+    --             require("hover.providers.gh") -- Github: Issues and PR's
+    --             require("hover.providers.gh_user") -- Github: Users
+    --             require("hover.providers.dictionary")
+    --             -- require('hover.providers.jira')
+    --         end,
+    --         preview_opts = {
+    --             border = ui.border.style,
+    --         },
+    --         preview_window = false,
+    --         title = true,
+    --         mouse_providers = {
+    --             "LSP",
+    --         },
+    --         mouse_delay = 500,
+    --     },
+    -- },
 }
