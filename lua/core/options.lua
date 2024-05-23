@@ -7,7 +7,7 @@ local M = {
     laststatus = 2,
     showmode = false,
 
-    conceallevel = 1,
+    conceallevel = 2,
 
     clipboard = "unnamedplus",
     belloff = "all",

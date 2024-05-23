@@ -37,11 +37,11 @@ end
 
 local function set_plugins_to_load_on_file_open()
     local plugins = {
-        "barbar",
-        "gitsigns",
-        "lualine",
-        "satellite",
         "todo-comments",
+        "lualine",
+        "gitsigns",
+        "barbar",
+        "satellite",
         "cmp",
     }
 
