@@ -1,12 +1,11 @@
 local icons = require("core.icons")
 local u = require("core.utils")
 
-u.lazy_load_plugin_on_file_open("barbar.nvim")
-
 return {
     "romgrk/barbar.nvim",
+    name = "barbar",
     dependencies = {
-        "nvim-tree/nvim-web-devicons",
+        "web-devicons",
     },
     opts = {
         animation = false,

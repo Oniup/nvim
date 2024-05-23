@@ -8,7 +8,6 @@ local function update_repository()
         "clangd",
         -- Formatters
         "stylua",
-        "clang-format",
         "cmakelang",
         -- Debug servers
         "codelldb",
@@ -29,10 +28,11 @@ end
 
 return {
     "williamboman/mason.nvim",
+    name = "mason",
     cmd = { "Mason", "MasonUpdate" },
     dependencies = {
-        "neovim/nvim-lspconfig",
-        "nvim-tree/nvim-web-devicons",
+        "lspconfig",
+        "web-devicons",
         "williamboman/mason-lspconfig.nvim",
     },
     config = function()

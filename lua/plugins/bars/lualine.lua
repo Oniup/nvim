@@ -67,42 +67,44 @@ local sections = {
 
 return {
     "nvim-lualine/lualine.nvim",
+    name = "lualine",
     dependencies = {
-        "nvim-tree/nvim-web-devicons",
+        "web-devicons",
     },
-    lazy = false,
-    opts = {
-        options = {
-            theme = require("core.utils").prequire("ignite.lualine_theme"),
-            component_separators = { right = "", left = "" },
-            section_separators = { right = "", left = "" },
-        },
-        sections = {
-            lualine_a = { sections.mode },
-            lualine_b = { sections.branch },
-            lualine_c = { sections.diff },
-            lualine_x = {
-                sections.diagnostics,
+    config = function()
+        require("lualine").setup({
+            options = {
+                theme = require("ignite.lualine_theme"),
+                component_separators = { right = "", left = "" },
+                section_separators = { right = "", left = "" },
             },
-            lualine_y = { sections.filetype, sections.filename },
-            lualine_z = { sections.location },
-        },
-        inactive_sections = {
-            lualine_c = { sections.diff },
-            lualine_x = { sections.diagnostics },
-            lualine_y = {
-                sections.filetype_no_color,
-                sections.filename,
-                sections.location,
+            sections = {
+                lualine_a = { sections.mode },
+                lualine_b = { sections.branch },
+                lualine_c = { sections.diff },
+                lualine_x = {
+                    sections.diagnostics,
+                },
+                lualine_y = { sections.filetype, sections.filename },
+                lualine_z = { sections.location },
             },
-        },
-        extensions = {
-            "lazy",
-            "mason",
-            "nvim-dap-ui",
-            "nvim-tree",
-            "quickfix",
-            "toggleterm",
-        },
-    },
+            inactive_sections = {
+                lualine_c = { sections.diff },
+                lualine_x = { sections.diagnostics },
+                lualine_y = {
+                    sections.filetype_no_color,
+                    sections.filename,
+                    sections.location,
+                },
+            },
+            extensions = {
+                "lazy",
+                "mason",
+                "nvim-dap-ui",
+                "nvim-tree",
+                "quickfix",
+                "toggleterm",
+            },
+        })
+    end,
 }

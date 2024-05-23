@@ -1,9 +1,10 @@
 return {
     "nvimtools/none-ls.nvim",
+    name = "null-ls",
     dependencies = {
-        "neovim/nvim-lspconfig",
-        "williamboman/mason.nvim",
-        "nvim-lua/plenary.nvim",
+        "lspconfig",
+        "mason",
+        "plenary",
         "jay-babu/mason-null-ls.nvim",
     },
     config = function()

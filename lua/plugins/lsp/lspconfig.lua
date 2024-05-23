@@ -60,13 +60,15 @@ local function ui_set_diagnostics()
     vim.diagnostic.config(ui.lsp)
 end
 
-require("core.utils").lazy_load_plugin_on_file_open("nvim-lspconfig")
 return {
     "neovim/nvim-lspconfig",
+    name = "lspconfig",
+    lazy = false,
     dependencies = {
-        "stevearc/dressing.nvim",
-        "nvimtools/none-ls.nvim",
-        "williamboman/mason.nvim",
+        "null-ls",
+        "mason",
+        -- UI
+        "dressing",
     },
     config = function()
         require("mason-lspconfig").setup_handlers({

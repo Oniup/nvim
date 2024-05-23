@@ -18,17 +18,14 @@ function M.load_core()
     map("n", "<leader>sj", "<CMD> split <CR>", opts("Split window"))
     map("n", "<leader>sl", "<CMD> vsplit <CR>", opts("Split window"))
 
-    map("n", "<C-Up>", "<CMD> resize -2 <CR>", opts("Resize window"))
-    map("n", "<C-Down>", "<CMD> resize +2 <CR>", opts("Resize window"))
+    map("n", "<C-Up>", "<CMD> resize +2 <CR>", opts("Resize window"))
+    map("n", "<C-Down>", "<CMD> resize -2 <CR>", opts("Resize window"))
     map("n", "<C-Left>", "<CMD> vertical resize -2 <CR>", opts("Resize window"))
     map("n", "<C-Right>", "<CMD> vertical resize +2 <CR>", opts("Resize window"))
 
-    map("n", "<leader>d", '"_d', opts("Delete without yank"))
-    map("n", "<leader>c", '"_c', opts("Cut without yank"))
-
-    map("x", "<leader>d", '"_d', opts("Delete without yank"))
-    map("x", "<leader>c", '"_c', opts("Cut without yank"))
-    map("x", "<leader>p", '"_p', opts("Paste without yank"))
+    map({ "n", "v" }, "<leader>d", '"_d', opts("Delete without yank"))
+    map({ "n", "v" }, "<leader>c", '"_c', opts("Cut without yank"))
+    map("v", "<leader>p", '"_dP', opts("Paste without yank"))
 end
 
 M.load_plugins = require("plugins.mappings").load_mappings

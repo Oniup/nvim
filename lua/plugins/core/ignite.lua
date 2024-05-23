@@ -3,6 +3,7 @@ local no_border = ui.border.style == "solid" or ui.boder.style == "none"
 
 return {
     "Oniup/ignite.nvim",
+    name = "ignite",
     lazy = false,
     priority = 1000,
     config = function()

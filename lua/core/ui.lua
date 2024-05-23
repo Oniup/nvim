@@ -87,4 +87,29 @@ M.dapui = {
     },
 }
 
+M.telescope_themes = {
+    large_with_preview = {
+        previewer = true,
+        layout_strategy = "horizontal",
+        layout_config = {
+            prompt_position = "top",
+            anchor = "N",
+            width = 0.80,
+            height = 0.50,
+        },
+    },
+    smaller_with_no_preview = {
+        previewer = false,
+        layout_strategy = "center",
+        border = M.border.style ~= "none",
+        borderchars = M.border.telescope[M.border.style],
+        layout_config = {
+            prompt_position = "top",
+            anchor = "N",
+            width = 0.40,
+            height = 0.50,
+        },
+    },
+}
+
 return M

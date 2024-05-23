@@ -1,14 +1,12 @@
 return {
     defaults = {
         lazy = true,
-        version = "*",
     },
     install = {
         missing = true,
     },
     checker = {
         enabled = false, -- Makes a massive difference on startup time
-        notify = false,
     },
     change_detection = {
         enabled = false,
@@ -21,6 +19,7 @@ return {
         border = require("core.ui").border.style,
         size = { width = 0.6, height = 0.6 },
         icons = require("core.icons").lazy,
+        backdrop = 100,
         pills = true,
     },
     profiling = {

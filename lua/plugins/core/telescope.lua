@@ -1,47 +1,30 @@
 local ui = require("core.ui")
-local icons = require("core.icons")
-
-local smaller_with_no_preview = {
-    previewer = false,
-    layout_strategy = "center",
-    layout_config = {
-        prompt_position = "top",
-        anchor = "N",
-        width = 0.40,
-        height = 0.50,
-    },
-}
 
 return {
     "nvim-telescope/telescope.nvim",
+    name = "telescope",
     dependencies = {
         "burntsushi/ripgrep",
-        "nvim-tree/nvim-web-devicons",
-        "nvim-lua/plenary.nvim",
-        "nvim-lua/popup.nvim",
+
+        "web-devicons",
+        "plenary",
+        "popup",
     },
     cmd = { "Telescope" },
     config = function()
         local actions = require("telescope.actions")
         require("telescope").setup({
-            defaults = {
-                initial_mode = "insert",
-                selection_strategy = "reset",
-                prompt_prefix = " " .. icons.noice.cmdline.search .. "  ",
-                selection_caret = "  ",
-                entry_prefix = "  ",
+            defaults = vim.tbl_deep_extend("force", ui.telescope_themes.large_with_preview, {
+                sorting_strategy = "ascending",
                 border = ui.border.style ~= "none",
                 borderchars = ui.border.telescope[ui.border.style],
-                sorting_strategy = "ascending",
+                initial_mode = "insert",
+                selection_strategy = "reset",
+                prompt_prefix = " " .. require("core.icons").cmdline.search .. "  ",
+                selection_caret = "  ",
+                entry_prefix = "  ",
                 preview = true,
                 preview_cutoff = 1, -- Preview should always show (unless previewer = false)
-                layout_strategy = "horizontal",
-                layout_config = {
-                    prompt_position = "top",
-                    anchor = "N",
-                    width = 0.80,
-                    height = 0.50,
-                },
                 file_ignore_patterns = {
                     "bin",
                     "build",
@@ -50,7 +33,6 @@ return {
                     "dependencies",
                     "thirdparty",
                     "third_party",
-                    "tests",
                 },
                 path_display = { "truncate" },
                 mappings = {
@@ -64,9 +46,10 @@ return {
                         ["<C-j>"] = actions.select_horizontal,
                     },
                 },
-            },
+            }),
             pickers = {
-                builtin = smaller_with_no_preview,
+                code_action = ui.telescope_themes.smaller_with_no_preview,
+                builtin = ui.telescope_themes.smaller_with_no_preview,
             },
         })
     end,

@@ -2,21 +2,61 @@ local M = {}
 
 M.lualine_icon = "󰈸"
 
-M.mason = {
-    package_installed = "",
-    package_pending = "",
-    package_uninstalled = "",
+M.loading = {
+    completed = "",
+    uncompleted = "",
+    loading_spinner = { "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" },
+    downloading = "",
 }
 
-M.progress = {
-    spinner = { "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" },
-    done = "",
+M.arrow = {
+    left = "",
+    right = "",
+    up = "",
+    down = "",
+}
+
+M.cmdline = {
+    cmdline = " ",
+    filter = "󰈲 ",
+    filter_highlighted = "󱃥 ",
+    search = " ",
+    lua = " ",
+    python = "󰌠 ",
+    help = "? ",
+}
+
+M.task = {
+    checked = "",
+    unchecked = "",
+    dot_checked = "",
+    dot_unchecked = "",
+}
+
+M.list = {
+    "●",
+    M.arrow.right,
+    "★",
+    "‒",
+}
+
+M.mason = {
+    package_installed = M.loading.completed,
+    package_pending = M.loading.downloading,
+    package_uninstalled = M.loading.uncompleted,
+}
+
+M.fidget = {
+    done = M.loading.completed,
+    spinner = M.loading_spinner,
+    icon_separator = " ",
+    group_separator = "---",
 }
 
 M.barbar = {
     separator = { left = "▎", right = "" },
-    close = "",
-    modified = "",
+    close = M.task.unchecked,
+    modified = M.task.dot_unchecked,
     present = "default", -- default', 'powerline', or 'slanted'
 }
 
@@ -24,7 +64,7 @@ M.dap = {
     DapBreakpoint = { text = "", texthl = "DiagnosticSignError" },
     DapBreakpointCondition = { text = "", texthl = "DiagnosticSignError" },
     DapLogPoint = { text = "󰹕", texthl = "DiagnosticSignInfo" },
-    DapStopped = { text = "➜", texthl = "Operator" },
+    DapStopped = { text = M.arrow.right, texthl = "Operator" },
     DapBreakpointRejected = { text = "", texthl = "Comment" },
 }
 
@@ -56,49 +96,32 @@ M.lazy = {
     import = "",
     keys = "󰌌",
     lazy = "󰂠",
-    loaded = "",
-    not_loaded = "",
+    loaded = M.loading.completed,
+    not_loaded = M.loading.uncompleted,
     plugin = "",
     runtime = "",
     require = "󰢱",
     source = "󰅱",
     start = "",
-    task = "",
-    list = { "●", "➜", "★", "‒" },
+    task = M.task.checked,
+    list = M.list,
 }
 
 M.diagnostics = {
+    debug = " ",
     error = " ",
-    warn = " ",
+    -- warn = " ",
+    warn = " ",
     info = " ",
     hint = " ",
     other = {
+        bug = " ",
         todo = " ",
         warn = "󰀪 ",
         hack = " ",
         note = "󱞂 ",
         perf = "󱫍 ",
         test = " ",
-    },
-}
-
-M.noice = {
-    cmdline = {
-        -- cmdline = " ",
-        cmdline = " ",
-        filter = "󰈲 ",
-        filter_highlighted = "󱃥 ",
-        search = " ",
-        lua = " ",
-        python = "󰌠 ",
-        help = "? ",
-    },
-    popup = {
-        DEBUG = "",
-        ERROR = "",
-        INFO = "",
-        TRACE = "",
-        WARN = "",
     },
 }
 
@@ -138,7 +161,7 @@ M.nvim_tree_glyphs = {
 
 M.whichkey = {
     breadcrumb = "»",
-    separator = "➜ ",
+    separator = M.arrow.right .. " ",
     group = "",
 }
 

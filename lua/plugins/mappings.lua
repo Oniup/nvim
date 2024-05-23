@@ -86,22 +86,29 @@ function M.load_mappings()
 end
 
 function M.lsp_load_buf_mappings(client, bufnr)
+    local hover = require("hover")
+
     local function lsp_opts(desc)
         return { noremap = true, silent = true, buffer = bufnr, desc = desc }
     end
 
+    map("n", "K", hover.hover, lsp_opts("Open hover info"))
+    map("n", "<MouseMove>", hover.hover_mouse, lsp_opts("Open hover info using the mouse"))
+
+    map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("Format file"))
     map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
+    map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("Rename"))
+    map({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, lsp_opts("Code actions"))
+
     map("n", "gd", "<cmd> Telescope lsp_definitions <cr>", lsp_opts("Goto definitions"))
     map("n", "gi", "<cmd> Telescope lsp_implementations <cr>", lsp_opts("Goto implementations"))
     map("n", "gt", "<cmd> Telescope lsp_type_definitions <cr>", lsp_opts("Goto type definitions"))
     map("n", "gr", "<cmd> Telescope lsp_references <cr>", lsp_opts("List references"))
+
     map("n", "gl", vim.diagnostic.open_float, lsp_opts("Open diagnostics hover info"))
-    map("n", "K", vim.lsp.buf.hover, lsp_opts("Open hover info"))
-    map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("Format file"))
-    map("n", "<leader>ca", vim.lsp.buf.code_action, lsp_opts("Code actions"))
-    map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("Rename"))
     map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("Go to next diagnostic"))
     map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("Go to prev diagnostic"))
+
     map(
         "n",
         "<leader>di",

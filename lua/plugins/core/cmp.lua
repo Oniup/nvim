@@ -18,14 +18,14 @@ local menu_names = {
     cmp_tabnine = "tabnine",
     codeium = "codeium",
     copilot = "copilot",
-    buffer = "buffer",
     luasnip = "snip",
     path = "path",
+    crates = "crates",
     cmdline = "command",
     calc = "calc",
     emoji = "emoji",
+    buffer = "buffer",
     treesitter = "treesitter",
-    crates = "crates",
     tmux = "tmux",
 }
 
@@ -74,12 +74,11 @@ local function popup_fmt(entry, item)
     return u.map_tbl(item, fmt)
 end
 
-u.lazy_load_plugin_on_file_open("nvim-cmp")
-
 return {
     "hrsh7th/nvim-cmp",
+    name = "cmp",
     dependencies = {
-        "neovim/nvim-lspconfig",
+        "lspconfig",
         "L3MON4D3/LuaSnip",
 
         "saadparwaiz1/cmp_luasnip",
@@ -125,7 +124,7 @@ return {
                 { name = "codeium" },
                 { name = "copilot" },
                 { name = "buffer" },
-                { name = "luasnip" },
+                -- { name = "luasnip" },
                 { name = "path" },
                 { name = "calc" },
                 { name = "emoji" },
