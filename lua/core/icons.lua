@@ -5,7 +5,16 @@ M.lualine_icon = "󰈸"
 M.loading = {
     completed = "",
     uncompleted = "",
-    loading_spinner = { "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥" },
+    loading_spinner = {
+        "󰪞",
+        "󰪟",
+        "󰪠",
+        "󰪡",
+        "󰪢",
+        "󰪣",
+        "󰪤",
+        "󰪥",
+    },
     downloading = "",
 }
 
@@ -47,13 +56,19 @@ M.mason = {
 }
 
 M.seporators = {
-    horizontal = "---",
-    vertical = "▎",
-    centered_vertical = "│",
+    horizontal = {
+        segmented = "---",
+        connected = "───",
+    },
+    vertical = {
+        thick = "▎",
+        thin = "▏",
+        centered = "│",
+    },
 }
 
 M.barbar = {
-    separator = { left = M.seporators.default, right = "" },
+    separator = { left = M.seporators.vertical.thick, right = "" },
     close = M.task.unchecked,
     modified = M.task.dot_unchecked,
     present = "default", -- default', 'powerline', or 'slanted'
@@ -125,12 +140,12 @@ M.diagnostics = {
 }
 
 M.gitsigns = {
-    add = { text = M.seporators.centered_vertical },
-    change = { text = M.seporators.centered_vertical },
+    add = { text = M.seporators.vertical.centered },
+    change = { text = M.seporators.vertical.centered },
     delete = { text = "_" },
     topdelete = { text = "‾" },
-    changedelete = { text = M.seporators.centered_vertical },
-    untracked = { text = M.seporators.centered_vertical },
+    changedelete = { text = M.seporators.vertical.centered },
+    untracked = { text = M.seporators.vertical.centered },
 }
 
 M.nvim_tree_glyphs = {

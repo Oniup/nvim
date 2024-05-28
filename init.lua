@@ -42,7 +42,7 @@ local function set_plugins_to_load_on_file_open()
         "gitsigns",
         "barbar",
         "satellite",
-        "mini.indentscope",
+        "indent-blankline",
         "cmp",
     }
 

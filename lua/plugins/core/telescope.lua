@@ -33,6 +33,8 @@ return {
                     "dependencies",
                     "thirdparty",
                     "third_party",
+                    ".cache",
+                    ".git",
                 },
                 path_display = { "truncate" },
                 mappings = {

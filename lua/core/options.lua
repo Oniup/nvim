@@ -5,13 +5,12 @@ local M = {
     cursorline = true,
     signcolumn = "yes", -- number: for thinner lines
     laststatus = 2,
-    showmode = false,
+    showmode = true,
 
-    conceallevel = 3,
+    conceallevel = 0,
 
     clipboard = "unnamedplus",
     belloff = "all",
-    visualbell = false,
 
     tabstop = 4,
     shiftwidth = 4,
@@ -31,11 +30,11 @@ local M = {
     wrap = false,
 
     mouse = "a", -- Enables mouse functionality
-    list = true, -- Show white spaces
+    list = false, -- Show white spaces
 
-    inccommand = "split", -- Line preview of :s results
-    incsearch = false, -- Do incremental search
-    ignorecase = false, -- Ignore case in search
+    -- inccommand = "split", -- Line preview of :s results
+    incsearch = true, -- Do incremental search
+    ignorecase = true, -- Ignore case in search
 
     termguicolors = true, -- Use 24bit colors
     synmaxcol = 200, -- Don't bother syntax highlighting long lines

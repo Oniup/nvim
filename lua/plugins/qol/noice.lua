@@ -11,6 +11,7 @@ return {
     },
     opts = {
         cmdline = {
+            enabled = true,
             format = {
                 cmdline = { pattern = "^:", icon = icons.cmdline.cmdline, lang = "vim" },
                 search_down = {
