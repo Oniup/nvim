@@ -9,7 +9,6 @@ function M.load_core()
 
     map("i", "jk", "<ESC>", opts("Exit insert mode"))
     map("n", "<leader>nh", "<CMD> noh <CR>", opts("Hide search highlights"))
-    map("n", "z", "q", opts("Record macro"))
 
     map("n", "<C-h>", "<C-w>h", opts("Window navigation"))
     map("n", "<C-j>", "<C-w>j", opts("Window navigation"))

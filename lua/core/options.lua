@@ -5,7 +5,7 @@ local M = {
     cursorline = true,
     signcolumn = "yes", -- number: for thinner lines
     laststatus = 2,
-    showmode = true,
+    showmode = false,
 
     conceallevel = 0,
 
