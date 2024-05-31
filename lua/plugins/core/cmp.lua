@@ -80,6 +80,7 @@ return {
     dependencies = {
         "lspconfig",
         "L3MON4D3/LuaSnip",
+        "codeium",
 
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
@@ -118,10 +119,10 @@ return {
             preselect = cmp.PreselectMode.None,
             completion = { completeopt = "menu,menuone,noselect" },
             sources = cmp.config.sources({
+                { name = "codeium" },
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
                 { name = "cmp_tabnine" },
-                { name = "codeium" },
                 { name = "copilot" },
                 { name = "buffer" },
                 { name = "luasnip" },
