@@ -32,18 +32,29 @@ M.border = {
 
 M.cmp = {
     menu = {
-        source = true,
+        source = false,
         kind = false,
         wrap = { "", "" },
     },
     kind = {
         icon = true,
-        name = true,
+        name = false,
         wrap_name = { "(", ")" },
     },
-    field_arrangement = { "abbr", "kind", "menu" },
+    field_arrangement = { "kind", "menu", "abbr" },
     selected_background_color = "PmenuSel",
     fixed_width = 0.4,
+}
+
+M.cmp.window = {
+    completion = {
+        winhighlight = "Normal:NormalFloat,CursorLine:" .. M.cmp.selected_background_color,
+        border = M.border.style,
+    },
+    documentation = {
+        winhighlight = "Normal:NormalFloat",
+        border = M.border.style,
+    },
 }
 
 M.lsp = {

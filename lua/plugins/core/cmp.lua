@@ -133,17 +133,7 @@ return {
                 { name = "crates" },
                 { name = "tmux" },
             }),
-            window = {
-                completion = {
-                    winhighlight = "Normal:NormalFloat,CursorLine:"
-                        .. ui.cmp.selected_background_color,
-                    border = ui.border.style,
-                },
-                documentation = {
-                    winhighlight = "Normal:NormalFloat",
-                    border = ui.border.style,
-                },
-            },
+            window = ui.cmp.window,
             formatting = {
                 fields = ui.cmp.field_arrangement,
                 format = popup_fmt,
