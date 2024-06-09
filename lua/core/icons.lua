@@ -148,6 +148,16 @@ M.gitsigns = {
     untracked = { text = M.seporators.vertical.centered },
 }
 
+M.git = {
+    modified = "",
+    deleted = "󰧧",
+    added = "",
+    renamed = "",
+    copied = "»",
+    type_change = "",
+    untracked = "?",
+}
+
 M.nvim_tree_glyphs = {
     default = "󰈙",
     symlink = "",
@@ -163,12 +173,12 @@ M.nvim_tree_glyphs = {
         symlink_open = "󰉕",
     },
     git = {
-        unstaged = "",
+        unstaged = M.git.modified,
         staged = "»",
         unmerged = "󰘭",
-        renamed = "",
-        untracked = "",
-        deleted = "󰧧",
+        renamed = M.git.renamed,
+        untracked = M.git.untracked,
+        deleted = M.git.deleted,
         ignored = "",
     },
 }

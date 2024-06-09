@@ -1,6 +1,4 @@
 local function load_extensions()
-    local telescope = require("telescope")
-    telescope.load_extension("dap")
     require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
         sources = {
             { name = "dap" },
@@ -23,7 +21,6 @@ return {
     dependencies = {
         "dap",
         "nio",
-        "nvim-telescope/telescope-dap.nvim",
         "rcarriga/cmp-dap",
     },
     config = function()
