@@ -1,7 +1,7 @@
 local opts = {
     size = function(term)
         if term.direction == "horizontal" then
-            return 20
+            return 40
         elseif term.direction == "vertical" then
             return vim.o.columns * 0.4
         end
@@ -10,6 +10,7 @@ local opts = {
     direction = "horizontal",
     autochdir = true,
     persist_mode = false,
+    hide_numbers = false,
     float_opts = {
         border = require("core.ui").border.style,
         width = 0.6,
@@ -17,17 +18,19 @@ local opts = {
     },
 }
 
-if vim.g.colors_name == "ignite" then
-    opts.shade_terminals = true
-    opts.highlights = {
-        Normal = {
-            link = "ColGroupBackground0",
-        },
-    }
-end
-
 return {
     "akinsho/toggleterm.nvim",
     cmd = { "ToggleTerm" },
-    opts = opts,
+    config = function()
+        if vim.g.colors_name == "ignite" then
+            opts.shade_terminals = true
+            opts.highlights = {
+                Normal = {
+                    link = "ColGroupBackground0",
+                },
+            }
+        end
+
+        require("toggleterm").setup(opts)
+    end,
 }

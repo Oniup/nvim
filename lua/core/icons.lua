@@ -155,7 +155,7 @@ M.git = {
     renamed = "",
     copied = "»",
     type_change = "",
-    untracked = "?",
+    untracked = "󱟂",
 }
 
 M.nvim_tree_glyphs = {

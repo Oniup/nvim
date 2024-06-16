@@ -22,9 +22,9 @@ local function fzf()
     map("n", "<leader>fa", "<CMD> FzfLua builtin <CR>", opts("All Fzf builtin functions"))
 
     -- Git
-    map("n", "<leader>fs", "<CMD> FzfLua git_status <CR>", opts("Git status"))
-    map("n", "<leader>fc", "<CMD> FzfLua git_commits <CR>", opts("Git commit"))
-    map("n", "<leader>fb", "<CMD> FzfLua git_branches <CR>", opts("Git branches"))
+    map("n", "<leader>gs", "<CMD> FzfLua git_status <CR>", opts("Git status"))
+    map("n", "<leader>gc", "<CMD> FzfLua git_commits <CR>", opts("Git commit"))
+    map("n", "<leader>gb", "<CMD> FzfLua git_branches <CR>", opts("Git branches"))
 
     -- Misc
     map({ "v", "i" }, "<C-x><C-f>", function()
