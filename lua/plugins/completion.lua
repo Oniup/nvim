@@ -1,16 +1,5 @@
-local u = require("core.utils")
-local ui = require("core.ui")
-
-local function has_words_before()
-    local unpack = table.unpack or nil
-    if unpack then
-        local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0
-            and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s")
-                == nil
-    end
-    return false
-end
+local ui = require("ui")
+local icons = require("icons")
 
 local menu_names = {
     nvim_lsp = "lsp",
@@ -29,7 +18,16 @@ local menu_names = {
     tmux = "tmux",
 }
 
-local function popup_fmt(entry, item)
+local function has_words_before()
+    local unpack = table.unpack or nil
+    if unpack then
+        local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    end
+    return false
+end
+
+local function format_popup(entry, item)
     local insert = table.insert
     local concat = table.concat
     local fmt = {
@@ -53,7 +51,7 @@ local function popup_fmt(entry, item)
     builder = {}
     wrap = ui.cmp.kind.wrap_name
     if ui.cmp.kind.icon then
-        insert(builder, require("core.icons").kind[item.kind] or "?")
+        insert(builder, icons.kind[item.kind] or "?")
     end
     if ui.cmp.kind.name then
         insert(builder, wrap[1] .. string.lower(item.kind) .. wrap[2])
@@ -71,16 +69,15 @@ local function popup_fmt(entry, item)
             fmt.abbr = item.abbr .. (" "):rep(max_abbr_width - #item.abbr)
         end
     end
-    return u.map_tbl(item, fmt)
+    return vim.tbl_deep_extend("force", item, fmt)
 end
 
 return {
     "hrsh7th/nvim-cmp",
-    name = "cmp",
     dependencies = {
-        "lspconfig",
+        "neovim/nvim-lspconfig",
         "L3MON4D3/LuaSnip",
-        "codeium",
+        -- "codeium",
 
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
@@ -90,6 +87,7 @@ return {
     },
     config = function()
         local cmp = require("cmp")
+
         require("cmp").setup({
             mapping = cmp.mapping.preset.insert({
                 ["<TAB>"] = function(fallback)
@@ -136,7 +134,7 @@ return {
             window = ui.cmp.window,
             formatting = {
                 fields = ui.cmp.field_arrangement,
-                format = popup_fmt,
+                format = format_popup,
             },
             snippet = {
                 expand = function(args)
@@ -146,3 +144,4 @@ return {
         })
     end,
 }
+

@@ -1,4 +1,4 @@
-local icons = require("core.icons")
+local icons = require("icons")
 
 local sections = {
     mode = {
@@ -67,9 +67,8 @@ local sections = {
 
 return {
     "nvim-lualine/lualine.nvim",
-    name = "lualine",
     dependencies = {
-        "web-devicons",
+        { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
     },
     config = function()
         require("lualine").setup({

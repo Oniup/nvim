@@ -1,3 +1,6 @@
+local icons = require("icons")
+local ui = require("ui")
+
 local function load_extensions()
     require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
         sources = {
@@ -16,16 +19,36 @@ local function set_dapui_listeners()
 end
 
 return {
-    "rcarriga/nvim-dap-ui",
-    name = "dapui",
+    "mfussenegger/nvim-dap",
     dependencies = {
-        "dap",
-        "nio",
+        "williamboman/mason.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
+
+        "rcarriga/nvim-dap-ui",
+        "nvim-neotest/nvim-nio",
         "rcarriga/cmp-dap",
     },
+    cmd = {
+        "DapToggleBreakpoint",
+    },
     config = function()
-        local icons = require("core.icons")
-        local ui = require("core.ui")
+        local dap = require("dap")
+        local mason_dap = require("mason-nvim-dap")
+
+        -- Setup dap
+        dap.set_log_level("ERROR")
+        mason_dap.setup({
+            handlers = {
+                function(dapconfig)
+                    mason_dap.default_setup(dapconfig)
+                end,
+            },
+        })
+        for k, v in pairs(icons) do
+            vim.fn.sign_define(k, v)
+        end
+
+        -- Setup dapui
         require("dapui").setup({
             layouts = ui.dapui.layouts,
             icons = icons.dapui.expanding_controls,

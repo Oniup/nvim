@@ -1,6 +1,6 @@
 local M = {}
 
-local icons = require("core.icons")
+local icons = require("icons")
 
 M.border = {
     style = "solid",
@@ -76,16 +76,16 @@ M.dapui = {
     controls = {
         element = "console",
         enabled = true,
-        icons = icons.dapui.debugging_controls,
+        icons = icons.dap.debugging_controls,
     },
     layouts = {
         {
             size = 0.5,
             position = "left",
             elements = {
-                { id = "scopes", size = 0.50 },
+                { id = "scopes",  size = 0.50 },
                 { id = "watches", size = 0.25 },
-                { id = "stacks", size = 0.25 },
+                { id = "stacks",  size = 0.25 },
             },
         },
         {
@@ -98,41 +98,27 @@ M.dapui = {
     },
 }
 
-M.fzf_themes = {
-    default = {
-        border = M.border.style == "solid" and M.border.chars.solid or M.border.style,
-        fullscreen = false,
-        width = 0.5,
-        height = 0.6,
-        preview = {
-            border = "noborder",
-            wrap = "nowrap",
-            hidden = "hidden",
-            layout = "flex",
-            title = true,
-            title_pos = "center",
-            vertical = "down:45%",
-            horizontal = "right:70%",
-            scrollbar = "border",
-            scrolloff = vim.opt["scrolloff"],
-            delay = 0,
-            scrollchars = { icons.seporators.vertical.thick, "" },
-            winopts = {
-                number = true,
-                relativenumber = false,
-                cursorline = true,
-                cursorcolumn = false,
-                wrap = false,
-                signcolumn = "no",
-                list = false,
-                foldenable = false,
-            },
+M.telescope_themes = {
+    large_with_preview = {
+        previewer = true,
+        layout_strategy = "horizontal",
+        layout_config = {
+            prompt_position = "top",
+            anchor = "N",
+            width = 0.80,
+            height = 0.50,
         },
     },
-    enable_preview = {
-        width = 0.8,
-        preview = {
-            hidden = "nohidden",
+    smaller_with_no_preview = {
+        previewer = false,
+        layout_strategy = "center",
+        border = M.border.style ~= "none",
+        borderchars = M.border.chars[M.border.style],
+        layout_config = {
+            prompt_position = "top",
+            anchor = "N",
+            width = 0.40,
+            height = 0.50,
         },
     },
 }

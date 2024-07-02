@@ -1,11 +1,9 @@
-local icons = require("core.icons")
-local u = require("core.utils")
+local icons = require("icons")
 
 return {
     "romgrk/barbar.nvim",
-    name = "barbar",
     dependencies = {
-        "web-devicons",
+        { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
     },
     opts = {
         animation = false,

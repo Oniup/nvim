@@ -27,19 +27,22 @@ local function update_repository()
 end
 
 return {
-    "williamboman/mason.nvim",
-    name = "mason",
-    cmd = { "Mason", "MasonUpdate" },
+    "williamboman/mason-lspconfig.nvim",
     dependencies = {
-        "lspconfig",
-        "web-devicons",
-        "williamboman/mason-lspconfig.nvim",
+        {
+            "williamboman/mason.nvim",
+            cmd = { "Mason", "MasonUpdate" },
+            dependencies = {
+                "neovim/nvim-lspconfig",
+                { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+            },
+        },
     },
     config = function()
         require("mason").setup({
             ui = {
-                icons = require("core.icons").mason,
-                border = require("core.ui").border.style,
+                icons = require("icons").mason,
+                border = require("ui").border.style,
                 width = 0.6,
                 height = 0.6,
             },

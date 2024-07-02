@@ -1,20 +1,19 @@
-local ui = require("core.ui")
+local ui = require("ui")
 
 return {
     "stevearc/dressing.nvim",
-    name = "dressing",
     dependencies = {
-        "nui",
+        "MunifTanjim/nui.nvim",
     },
     opts = {
         input = {
             border = ui.border.style,
             mappings = {
                 n = {
-                    ["<C-q>"] = "Close",
+                    ["<C-c>"] = "Close",
                 },
                 i = {
-                    ["<C-q>"] = "Close",
+                    ["<C-c>"] = "Close",
                 },
             },
         },
@@ -42,10 +41,10 @@ return {
             },
             mappings = {
                 n = {
-                    ["<C-q>"] = "Close",
+                    ["<C-c>"] = "Close",
                 },
                 i = {
-                    ["<C-q>"] = "Close",
+                    ["<C-c>"] = "Close",
                 },
             },
         },

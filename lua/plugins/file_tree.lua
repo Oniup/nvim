@@ -1,5 +1,5 @@
-local ui = require("core.ui")
-local icons = require("core.icons")
+local ui = require("ui")
+local icons = require("icons")
 
 return {
     "nvim-tree/nvim-tree.lua",
