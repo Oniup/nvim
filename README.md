@@ -6,6 +6,7 @@
 * GCC, Windows users must have mingw installed and set on path.
 * Make, Windows users must have GnuWin32 installed and set on path.
 * NPM
+* Python3, pip
 
 # Install
 
