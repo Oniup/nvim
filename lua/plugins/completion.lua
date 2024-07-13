@@ -79,13 +79,13 @@ return {
     dependencies = {
         "neovim/nvim-lspconfig",
         "L3MON4D3/LuaSnip",
-        {
-            "Exafunction/codeium.nvim",
-            dependencies = {
-                "nvim-lua/plenary.nvim",
-            },
-            config = true,
-        },
+        -- {
+        --     "Exafunction/codeium.nvim",
+        --     dependencies = {
+        --         "nvim-lua/plenary.nvim",
+        --     },
+        --     config = true,
+        -- },
 
         "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",

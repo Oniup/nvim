@@ -38,12 +38,12 @@ return {
                 path_display = { "truncate" },
                 mappings = {
                     i = {
-                        ["C-c"] = actions.close,
+                        ["<C-q>"] = actions.close,
                         ["<C-l>"] = actions.select_vertical,
                         ["<C-j>"] = actions.select_horizontal,
                     },
                     n = {
-                        ["C-c"] = actions.close,
+                        ["<C-q>"] = actions.close,
                         ["<C-l>"] = actions.select_vertical,
                         ["<C-j>"] = actions.select_horizontal,
                     },

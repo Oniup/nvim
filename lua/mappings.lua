@@ -41,7 +41,7 @@ map("n", "<leader>e", "<CMD> NvimTreeToggle <CR>", opts("Toggle file explorer sp
 
 -- Buffer Line
 --------------------------------------------------------------------------------------------------
-map("n", "<C-c>", "<CMD> BufferClose <CR>", opts("Close buffer"))
+map("n", "<C-q>", "<CMD> BufferClose <CR>", opts("Close buffer"))
 map("n", "<S-l>", "<CMD> BufferNext <CR>", opts("Goto next buffer"))
 map("n", "<S-h>", "<CMD> BufferPrevious <CR>", opts("Goto previous buffer"))
 map("n", "<A-l>", "<CMD> BufferMoveNext <CR>", opts("Move buffer next"))
