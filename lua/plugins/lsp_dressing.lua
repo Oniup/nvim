@@ -10,10 +10,10 @@ return {
             border = ui.border.style,
             mappings = {
                 n = {
-                    ["<C-c>"] = "Close",
+                    ["<C-q>"] = "Close",
                 },
                 i = {
-                    ["<C-c>"] = "Close",
+                    ["<C-q>"] = "Close",
                 },
             },
         },
@@ -41,10 +41,10 @@ return {
             },
             mappings = {
                 n = {
-                    ["<C-c>"] = "Close",
+                    ["<C-q>"] = "Close",
                 },
                 i = {
-                    ["<C-c>"] = "Close",
+                    ["<C-q>"] = "Close",
                 },
             },
         },
