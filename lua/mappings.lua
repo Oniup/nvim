@@ -30,8 +30,8 @@ map("v", "<leader>p", '"_dP', opts("Paste without yank"))
 -- Toggle Terminal
 --------------------------------------------------------------------------------------------------
 map("n", "<A-i>", function()
-    vim.cmd("ToggleTerm")
-    vim.o.spell = false
+  vim.cmd("ToggleTerm")
+  vim.o.spell = false
 end, opts("Toggle terminal"))
 map("t", "<A-i>", "<CMD> ToggleTerm <CR>", opts("Toggle Terminal"))
 
@@ -54,39 +54,39 @@ map("n", "<leader>fg", "<CMD> Telescope live_grep <CR>", opts("Project live grep
 map("n", "<leader>fh", "<CMD> Telescope help_tags <CR>", opts("Find vim help tag"))
 map("n", "<leader>fa", "<CMD> Telescope builtin <CR>", opts("All telescope builtin functions"))
 map(
-    "n",
-    "<leader>fl",
-    "<CMD> Telescope find_files follow=true no_ignore=true hidden=true  <CR>",
-    opts("Find all")
+  "n",
+  "<leader>fl",
+  "<CMD> Telescope find_files follow=true no_ignore=true hidden=true  <CR>",
+  opts("Find all")
 )
 map(
-    "n",
-    "<leader>fs",
-    "<CMD> Telescope current_buffer_fuzzy_find <CR>",
-    opts("Find in current buf")
+  "n",
+  "<leader>fs",
+  "<CMD> Telescope current_buffer_fuzzy_find <CR>",
+  opts("Find in current buf")
 )
 
 -- DAP
 --------------------------------------------------------------------------------------------------
 map("n", "<F5>", function()
-    require("dap").continue()
-    require("dapui").open()
+  require("dap").continue()
+  require("dapui").open()
 end, opts("Start/Continue debugging"))
 map("n", "<F10>", "<CMD> DapStepOver <CR>", opts("Step over"))
 map("n", "<F11>", "<CMD> DapStepInto <CR>", opts("Step into"))
 map("n", "<F12>", "<CMD> DapStepOut <CR>", opts("Step out"))
 map("n", "<leader>dt", function()
-    require("dap").terminate()
-    require("dapui").close()
+  require("dap").terminate()
+  require("dapui").close()
 end, opts("Terminate dap session"))
 
 -- Breakpoints
 map("n", "<leader>br", "<CMD> DapToggleBreakpoint <CR>", opts("Toggle breakpoint"))
 map("n", "<leader>bc", function()
-    require("dap").clear_breakpoints()
+  require("dap").clear_breakpoints()
 end, opts("Clear breakpoints"))
 map("n", "<leader>de", function()
-    require("dapui").eval()
+  require("dapui").eval()
 end, opts("Dap evaluation of variable under cursor"))
 
 -- map("n", "<leader>dm", "<CMD> FzfLua dap_commands <CR>", opts("Show dap commands"))

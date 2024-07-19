@@ -1,7 +1,7 @@
 # Requirements
 
 * Nerd Font as your terminal font.
-    + Make sure the nerd font you set doesn't end with Mono to prevent small icons for best result.
+  + Make sure the nerd font you set doesn't end with Mono to prevent small icons for best result.
 * Ripgrep.
 * GCC, Windows users must have mingw installed and set on path.
 * Make, Windows users must have GnuWin32 installed and set on path.
