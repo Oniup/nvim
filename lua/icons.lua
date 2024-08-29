@@ -222,6 +222,7 @@ M.kind = {
   Character = "󱌯",
   String = "",
   Codeium = "󱙺",
+  Tabnine = "󱙺",
   Copilot = "",
 }
 

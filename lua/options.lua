@@ -12,9 +12,9 @@ local opts = {
   clipboard = "unnamedplus",
   belloff = "all",
 
-  tabstop = 4,
-  shiftwidth = 4,
-  softtabstop = 4,
+  tabstop = 2,
+  shiftwidth = 2,
+  softtabstop = 2,
   shiftround = true, -- always indent by multiple of shiftwidth
   expandtab = true,  -- Always use spaces instead of tabs
   scrolloff = 5,     -- Start scrolling x lines before edge of view port
