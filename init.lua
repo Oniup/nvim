@@ -7,6 +7,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("mappings")
 require("options")
+require("neovide")
 
 require("lazy").setup({
   { import = "plugins" },

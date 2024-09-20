@@ -75,9 +75,9 @@ end
 local function ui_set_diagnostics()
   for _, sign in ipairs({
     { name = "DiagnosticSignError", text = icons.diagnostics.error },
-    { name = "DiagnosticSignWarn",  text = icons.diagnostics.warn },
-    { name = "DiagnosticSignHint",  text = icons.diagnostics.hint },
-    { name = "DiagnosticSignInfo",  text = icons.diagnostics.info },
+    { name = "DiagnosticSignWarn", text = icons.diagnostics.warn },
+    { name = "DiagnosticSignHint", text = icons.diagnostics.hint },
+    { name = "DiagnosticSignInfo", text = icons.diagnostics.info },
   }) do
     vim.fn.sign_define(sign.name, {
       texthl = sign.name,

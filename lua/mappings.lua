@@ -23,6 +23,8 @@ map("n", "<C-Down>", "<CMD> resize -2 <CR>", opts("Resize window"))
 map("n", "<C-Left>", "<CMD> vertical resize -2 <CR>", opts("Resize window"))
 map("n", "<C-Right>", "<CMD> vertical resize +2 <CR>", opts("Resize window"))
 
+map({ "n", "v" }, "<leader>P", '"+p', opts("Paste from system clipboard"))
+map({ "n", "v" }, "<leader>Y", '"+y', opts("Yank from system clipboard"))
 map({ "n", "v" }, "<leader>d", '"_d', opts("Delete without yank"))
 map({ "n", "v" }, "<leader>c", '"_c', opts("Cut without yank"))
 map("v", "<leader>p", '"_dP', opts("Paste without yank"))

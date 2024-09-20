@@ -83,9 +83,9 @@ M.dapui = {
       size = 0.5,
       position = "left",
       elements = {
-        { id = "scopes",  size = 0.50 },
+        { id = "scopes", size = 0.50 },
         { id = "watches", size = 0.25 },
-        { id = "stacks",  size = 0.25 },
+        { id = "stacks", size = 0.25 },
       },
     },
     {
