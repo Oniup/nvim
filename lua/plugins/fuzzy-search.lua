@@ -12,7 +12,8 @@ return {
   },
   config = function()
     local actions = require("telescope.actions")
-    require("telescope").setup({
+    local telescope = require("telescope")
+    telescope.setup({
       defaults = vim.tbl_deep_extend("force", ui.telescope_themes.large_with_preview, {
         sorting_strategy = "ascending",
         border = ui.border.style ~= "none",
@@ -59,6 +60,8 @@ return {
         },
       },
     })
-    pcall(require("telescope").load_extension, "ui-select")
+
+    telescope.load_extension("ui-select")
+    telescope.load_extension("projects")
   end,
 }

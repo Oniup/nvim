@@ -25,6 +25,7 @@ return {
     "nvim-neotest/nvim-nio",
     "rcarriga/cmp-dap",
   },
+  lazy = true,
   config = function()
     require("dapui").setup({
       layouts = ui.dapui.layouts,

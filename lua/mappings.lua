@@ -37,9 +37,15 @@ map("n", "<A-i>", function()
 end, opts("Toggle terminal"))
 map("t", "<A-i>", "<CMD> ToggleTerm <CR>", opts("Toggle Terminal"))
 
--- File Tree
+-- File Tree And Projects
 --------------------------------------------------------------------------------------------------
 map("n", "<leader>e", "<CMD> NvimTreeToggle <CR>", opts("Toggle file explorer split"))
+map(
+  "n",
+  "<leader>o",
+  "<CMD> Telescope projects <CR>",
+  opts("Open registered project directories to open")
+)
 
 -- Buffer Line
 --------------------------------------------------------------------------------------------------
@@ -90,9 +96,3 @@ end, opts("Clear breakpoints"))
 map("n", "<leader>de", function()
   require("dapui").eval()
 end, opts("Dap evaluation of variable under cursor"))
-
--- map("n", "<leader>dm", "<CMD> FzfLua dap_commands <CR>", opts("Show dap commands"))
--- map("n", "<leader>dc", "<CMD> FzfLua dap_configurations <CR>", opts("Show dap configurations"))
--- map("n", "<leader>bl", "<CMD> FzfLua dap_breakpoints <CR>", opts("List breakpoints"))
--- map("n", "<leader>dl", "<CMD> FzfLua dap_variables <CR>", opts("Show dap variables"))
--- map("n", "<leader>df", "<CMD> FzfLua dap_frames <CR>", opts("Show dap frames"))
