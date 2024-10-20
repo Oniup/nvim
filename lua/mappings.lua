@@ -6,6 +6,8 @@ local opts = require("util").mapping_opts
 
 -- Core
 --------------------------------------------------------------------------------------------------
+map({ "n", "v" }, "j", "gj")
+map({ "n", "v" }, "k", "gk")
 map("i", "jk", "<ESC>", opts("Exit insert mode"))
 map("n", "<leader>nh", "<CMD> noh <CR>", opts("Hide search highlights"))
 map("t", "JK", "<C-\\><C-n>", opts("Exit insert mode"))
