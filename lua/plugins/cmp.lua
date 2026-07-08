@@ -103,7 +103,6 @@ local function format_popup(entry, item)
   return vim.tbl_deep_extend("force", item, fmt)
 end
 
-
 return {
   "hrsh7th/nvim-cmp",
   dependencies = {
@@ -127,7 +126,9 @@ return {
   config = function()
     local cmp = require("cmp")
 
-    require("cmp").setup({
+    vim.o.pumheight = 15
+
+    cmp.setup({
       mapping = cmp.mapping.preset.insert({
         ["<TAB>"] = function(fallback)
           if not cmp.select_next_item() then
@@ -169,7 +170,12 @@ return {
         { name = "crates" },
         { name = "tmux" },
       }),
-      window = ui.cmp.window,
+      window = {
+        winhighlight = "Normal:NormalFloat,CursorLine:" .. ui.cmp.selected_background_color,
+        completion = {
+          scrollbar = false,
+        },
+      },
       formatting = {
         fields = ui.cmp.field_arrangement,
         format = format_popup,

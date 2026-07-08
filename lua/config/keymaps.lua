@@ -8,6 +8,81 @@ local opts = function(description)
   return { silent = true, noremap = true, desc = description }
 end
 
+M.dap_init = function()
+  map("n", "<F5>", "<CMD> DapContinue <CR>", opts("Debug: Start/Continue"))
+  map("n", "<leader>br", "<CMD> DapToggleBreakpoint <CR>", opts("Debug: Toggle Breakpoint"))
+  map("n", "<leader>bc", "<CMD> DapClearBreakpoints <CR>", opts("Clear breakpoints"))
+end
+
+M.dap = function()
+  local dap = require("dap")
+  local dapui = require("dapui")
+
+  map("n", "<F10>", dap.step_over, opts("Debug: Step Over"))
+  map("n", "<F11>", dap.step_into, opts("Debug: Step Into"))
+  map("n", "<F12>", dap.step_out, opts("Debug: Step Out"))
+
+  map("n", "<leader>de", dapui.eval, opts("Dap evaluation of variable under cursor"))
+  map("n", "<leader>dt", function()
+    dap.terminate()
+    dapui.close()
+  end, opts("Terminate dap session"))
+end
+
+M.lsp = function(client, bufnr)
+  local function lsp_opts(desc)
+    return { noremap = true, silent = true, buffer = bufnr, desc = desc }
+  end
+
+  -- Buffer local mappings
+  map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
+  map("n", "K", vim.lsp.buf.hover, lsp_opts("Open hover info"))
+  map({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, lsp_opts("Code actions"))
+  map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("Format file"))
+  map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("Rename"))
+  map("n", "gd", "<CMD> Telescope lsp_definitions <CR>", lsp_opts("Goto definitions"))
+  map("n", "gi", "<CMD> Telescope lsp_implementations <CR>", lsp_opts("Goto implementations"))
+  map("n", "gt", "<CMD> Telescope lsp_type_definitions <CR>", lsp_opts("Goto type definitions"))
+  map("n", "<leader>lr", "<CMD> Telescope lsp_references <CR>", lsp_opts("List references"))
+  map("n", "gl", vim.diagnostic.open_float, lsp_opts("Open diagnostics hover info"))
+  map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("Go to next diagnostic"))
+  map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("Go to prev diagnostic"))
+
+  -- Format on save
+  if client and client:supports_method("textDocument/formatting", { bufnr = bufnr }) then
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr, -- Scope this to the current buffer only
+      group = vim.api.nvim_create_augroup("LspFormat_" .. bufnr, { clear = true }),
+      callback = function()
+        vim.lsp.buf.format({
+          async = false,
+          id = client.id,
+        })
+      end,
+    })
+  end
+
+  -- Client-specific mappings
+  if client and client.name == "clangd" then
+    map("n", "<A-o>", function()
+      local params = { uri = vim.uri_from_bufnr(bufnr) }
+      -- Send the custom request to clangd
+      client:request("textDocument/switchSourceHeader", params, function(err, result)
+        if err then
+          print("Error switching files: " .. tostring(err.message))
+          return
+        end
+        if not result then
+          print("Corresponding file not found")
+          return
+        end
+        -- Open the resulting file
+        vim.cmd.edit(vim.uri_to_fname(result))
+      end, bufnr)
+    end, lsp_opts("Switch between source/header"))
+  end
+end
+
 M.core = function()
   -- Core
   --------------------------------------------------------------------------------------------------
@@ -64,6 +139,7 @@ M.core = function()
   map("n", "<leader>fg", "<CMD> Telescope live_grep <CR>", opts("Project live grep"))
   map("n", "<leader>fh", "<CMD> Telescope help_tags <CR>", opts("Find vim help tag"))
   map("n", "<leader>fa", "<CMD> Telescope builtin <CR>", opts("All telescope builtin functions"))
+  map("n", "<C-S-M>", "<CMD> Telescope diagnostics <CR>", opts("List project wide diagnostics"))
   map(
     "n",
     "<leader>fl",
@@ -81,78 +157,11 @@ M.core = function()
   --------------------------------------------------------------------------------------------------
   map("n", "<leader>hp", "<CMD> Gitsigns preview_hunk <CR>", opts("Preview original git changes"))
   map("n", "<leader>hr", "<CMD> Gitsigns reset_hunk <CR>", opts("Reset to original git changes"))
-end
 
-M.dap = function()
-  local dap = require("dap")
-  local dapui = require("dapui")
-
-  map("n", "<F5>", dap.continue, opts("Debug: Start/Continue"))
-  map("n", "<F10>", dap.step_over, opts("Debug: Step Over"))
-  map("n", "<F11>", dap.step_into, opts("Debug: Step Into"))
-  map("n", "<F12>", dap.step_out, opts("Debug: Step Out"))
-  map("n", "<leader>br", dap.toggle_breakpoint, opts("Debug: Toggle Breakpoint"))
-  map("n", "<leader>bc", dap.clear_breakpoints, opts("Clear breakpoints"))
-
-  map("n", "<leader>de", dapui.eval, opts("Dap evaluation of variable under cursor"))
-  map("n", "<leader>dt", function()
-    dap.terminate()
-    dapui.close()
-  end, opts("Terminate dap session"))
-end
-
-M.lsp = function(client, bufnr)
-  local function lsp_opts(desc)
-    return { noremap = true, silent = true, buffer = bufnr, desc = desc }
-  end
-
-  -- Buffer local mappings
-  map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
-  map("n", "K", vim.lsp.buf.hover, lsp_opts("Open hover info"))
-  map({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, lsp_opts("Code actions"))
-  map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("Format file"))
-  map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("Rename"))
-  map("n", "gd", "<CMD> Telescope lsp_definitions <CR>", lsp_opts("Goto definitions"))
-  map("n", "gi", "<CMD> Telescope lsp_implementations <CR>", lsp_opts("Goto implementations"))
-  map("n", "gt", "<CMD> Telescope lsp_type_definitions <CR>", lsp_opts("Goto type definitions"))
-  map("n", "<leader>lr", "<CMD> Telescope lsp_references <CR>", lsp_opts("List references"))
-  map("n", "gl", vim.diagnostic.open_float, lsp_opts("Open diagnostics hover info"))
-  map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("Go to next diagnostic"))
-  map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("Go to prev diagnostic"))
-
-  -- Format on save
-  if client and client:supports_method("textDocument/formatting", { bufnr = bufnr }) then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr, -- Scope this to the current buffer only
-      group = vim.api.nvim_create_augroup("LspFormat_" .. bufnr, { clear = true }),
-      callback = function()
-        vim.lsp.buf.format({
-          async = false,
-          id = client.id,
-        })
-      end,
-    })
-  end
-
-  -- Client-specific mappings
-  if client and client.name == "clangd" then
-    map("n", "<leader>o", function()
-      local params = { uri = vim.uri_from_bufnr(bufnr) }
-      -- Send the custom request to clangd
-      client:request("textDocument/switchSourceHeader", params, function(err, result)
-        if err then
-          print("Error switching files: " .. tostring(err.message))
-          return
-        end
-        if not result then
-          print("Corresponding file not found")
-          return
-        end
-        -- Open the resulting file
-        vim.cmd.edit(vim.uri_to_fname(result))
-      end, bufnr)
-    end, lsp_opts("Switch between source/header"))
-  end
+  -- Other
+  --------------------------------------------------------------------------------------------------
+  M.dap_init()
+  map("n", "<C-S-P>", "<CMD> ProjectList <CR>", opts("Open project/session from list"))
 end
 
 return M

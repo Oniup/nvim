@@ -11,7 +11,7 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    -- "stevearc/dressing.nvim",
+    "Issafalcon/lsp-overloads.nvim",
   },
   config = function()
     ui_set_popup_window()
@@ -52,8 +52,15 @@ return {
         properties = { "documentation", "additionalTextEdits", "detail" },
       },
     }
-    vim.lsp.config("*", {   -- Applies to every language
+    vim.lsp.config("*", { -- Applies to every language
       capabilities = capabilities,
+    })
+
+    require("lsp-overloads").setup({
+      ui = {
+        border = "none",
+        focusable = false,
+      },
     })
 
     -- Load custom settings for specific servers using native vim.lsp.config

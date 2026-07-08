@@ -7,6 +7,7 @@ return {
     "williamboman/mason.nvim",
     "jay-babu/mason-nvim-dap.nvim",
   },
+  cmd = { "DapContinue", "DapToggleBreakpoint", "DapClearBreakPoints", },
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
