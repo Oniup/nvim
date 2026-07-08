@@ -32,5 +32,10 @@ return {
     end
 
     require("config.keymaps").dap()
+    vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Error", linehl = "", numhl = "" })
+    vim.fn.sign_define(
+      "DapStopped",
+      { text = "▶️", texthl = "Success", linehl = "CursorLine", numhl = "" }
+    )
   end,
 }

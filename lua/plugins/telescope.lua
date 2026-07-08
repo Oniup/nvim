@@ -1,10 +1,8 @@
 return {
-  'nvim-telescope/telescope.nvim',
-  version = '*',
+  "nvim-telescope/telescope.nvim",
+  version = "*",
   dependencies = {
-    'nvim-lua/plenary.nvim',
-    -- optional but recommended
-    -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    "nvim-lua/plenary.nvim",
   },
   config = function()
     local telescope = require("telescope")
@@ -53,5 +51,5 @@ return {
         builtin = ui.telescope_themes.smaller_with_no_preview,
       },
     })
-  end
+  end,
 }

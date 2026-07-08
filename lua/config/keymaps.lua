@@ -85,6 +85,7 @@ end
 
 M.dap = function()
   local dap = require("dap")
+  local dapui = require("dapui")
 
   map("n", "<F5>", dap.continue, opts("Debug: Start/Continue"))
   map("n", "<F10>", dap.step_over, opts("Debug: Step Over"))
@@ -93,30 +94,11 @@ M.dap = function()
   map("n", "<leader>br", dap.toggle_breakpoint, opts("Debug: Toggle Breakpoint"))
   map("n", "<leader>bc", dap.clear_breakpoints, opts("Clear breakpoints"))
 
-  -- map("n", "<leader>B", function()
-  --   dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-  -- end, opts("Debug: Set Breakpoint"))
-
-  map("n", "<F5>", function()
-    require("dap").continue()
-    require("dapui").open()
-  end, opts("Start/Continue debugging"))
-  map("n", "<F10>", "<CMD> DapStepOver <CR>", opts("Step over"))
-  map("n", "<F11>", "<CMD> DapStepInto <CR>", opts("Step into"))
-  map("n", "<F12>", "<CMD> DapStepOut <CR>", opts("Step out"))
+  map("n", "<leader>de", dapui.eval, opts("Dap evaluation of variable under cursor"))
   map("n", "<leader>dt", function()
-    require("dap").terminate()
-    require("dapui").close()
+    dap.terminate()
+    dapui.close()
   end, opts("Terminate dap session"))
-
-  -- Breakpoints
-  map("n", "<leader>br", "<CMD> DapToggleBreakpoint <CR>", opts("Toggle breakpoint"))
-  map("n", "<leader>bc", function()
-    require("dap").clear_breakpoints()
-  end, opts("Clear breakpoints"))
-  map("n", "<leader>de", function()
-    require("dapui").eval()
-  end, opts("Dap evaluation of variable under cursor"))
 end
 
 M.lsp = function(client, bufnr)

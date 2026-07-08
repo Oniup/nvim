@@ -1,5 +1,9 @@
 return {
-  { "numToStr/Comment.nvim", config = true },
+  {
+    "numToStr/Comment.nvim",
+    lazy = false,
+    config = true,
+  },
   {
     "akinsho/toggleterm.nvim",
     cmd = "ToggleTerm",
