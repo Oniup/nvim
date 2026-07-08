@@ -1,0 +1,86 @@
+local ui = require("config.ui")
+
+local function ui_set_popup_window()
+  require("lspconfig.ui.windows").default_options = {
+    border = ui.border.style,
+  }
+end
+
+return {
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    -- "stevearc/dressing.nvim",
+  },
+  config = function()
+    ui_set_popup_window()
+
+    -- Initialize Mason
+    require("mason").setup({
+      ui = {
+        border = ui.border.style,
+        width = 0.6,
+        height = 0.6,
+      },
+    })
+
+    -- Auto install servers
+    local servers = {
+      "lua_ls",
+      "neocmake",
+      "clangd",
+    }
+
+    -- Setup mason-lspconfig to ensure they are downloaded
+    require("mason-lspconfig").setup({
+      ensure_installed = servers,
+    })
+
+    -- Define capabilities and apply them globally to ALL servers
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem = {
+      documentationFormat = { "markdown", "plaintext" },
+      snippetSupport = true,
+      preselectSupport = true,
+      insertReplaceSupport = true,
+      labelDetailsSupport = true,
+      deprecatedSupport = true,
+      commitCharactersSupport = true,
+      tagSupport = { valueSet = { 1 } },
+      resolveSupport = {
+        properties = { "documentation", "additionalTextEdits", "detail" },
+      },
+    }
+    vim.lsp.config("*", {   -- Applies to every language
+      capabilities = capabilities,
+    })
+
+    -- Load custom settings for specific servers using native vim.lsp.config
+    for _, server_name in ipairs(servers) do
+      local ok, custom_settings = pcall(require, "lsp_clients." .. server_name)
+      if ok then
+        vim.lsp.config(server_name, {
+          settings = custom_settings,
+        })
+      end
+      vim.lsp.enable(server_name)
+    end
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+      callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        local bufnr = ev.buf
+        local map = vim.keymap.set
+
+        local function lsp_opts(desc)
+          return { noremap = true, silent = true, buffer = bufnr, desc = desc }
+        end
+
+        vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+        require("config.keymaps").lsp(client, bufnr)
+      end,
+    })
+  end,
+}
