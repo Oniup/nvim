@@ -55,20 +55,6 @@ M.lsp_buffer_attach = function(client, bufnr)
   --   opts("LSP: Toggle Signature")
   -- )
 
-  -- Format on save
-  if client and client:supports_method("textDocument/formatting", { bufnr = bufnr }) then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr, -- Scope this to the current buffer only
-      group = vim.api.nvim_create_augroup("LspFormat_" .. bufnr, { clear = true }),
-      callback = function()
-        vim.lsp.buf.format({
-          async = false,
-          id = client.id,
-        })
-      end,
-    })
-  end
-
   -- Client-specific mappings
   if client and client.name == "clangd" then
     map("n", "<A-o>", function()
@@ -98,12 +84,6 @@ M.core = function()
   map("i", "jk", "<ESC>", opts("Exit insert mode"))
   map("n", "<leader>nh", "<CMD> noh <CR>", opts("Hide search highlights"))
   map("t", "JK", "<C-\\><C-n>", opts("Exit insert mode"))
-
-  -- Starting to prefer default
-  -- map("n", "<C-h>", "<C-w>h", opts("Window navigation"))
-  -- map("n", "<C-j>", "<C-w>j", opts("Window navigation"))
-  -- map("n", "<C-k>", "<C-w>k", opts("Window navigation"))
-  -- map("n", "<C-l>", "<C-w>l", opts("Window navigation"))
 
   map("n", "<leader>sj", "<CMD> split <CR>", opts("Split window"))
   map("n", "<leader>sl", "<CMD> vsplit <CR>", opts("Split window"))

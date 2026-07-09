@@ -12,6 +12,7 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "ray-x/lsp_signature.nvim",
+    "stevearc/conform.nvim",
   },
   config = function()
     ui_set_popup_window()
@@ -35,6 +36,23 @@ return {
     -- Setup mason-lspconfig to ensure they are downloaded
     require("mason-lspconfig").setup({
       ensure_installed = servers,
+    })
+
+    local conform = require("conform")
+    conform.setup({
+      formatters_by_ft = {
+        -- C/C++ and shader languages
+        c = { "clang-format" },
+        cpp = { "clang-format" },
+        glsl = { "clang-format" },
+        vert = { "clang-format" },
+        frag = { "clang-format" },
+        comp = { "clang-format" },
+
+        -- Other language formatters
+        lua = { "stylua" },
+        python = { "black" },
+      },
     })
 
     -- Define capabilities and apply them globally to ALL servers
@@ -89,6 +107,14 @@ return {
           floating_window_above_cur_line = true,
           padding = "",
         }, bufnr)
+
+        -- Format on save
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          pattern = "*",
+          callback = function(args)
+            conform.format({ bufnr = args.buf })
+          end,
+        })
       end,
     })
   end,
