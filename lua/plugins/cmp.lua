@@ -53,7 +53,7 @@ local function has_words_before()
   if unpack then
     local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
-        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
   return false
 end
@@ -91,9 +91,7 @@ local function format_popup(entry, item)
 
   -- Content
   if ui.cmp.fixed_width then
-    -- https://github.com/hrsh7th/nvim-cmp/discussions/609#discussioncomment-5727678
-    local win_width = vim.api.nvim_win_get_width(0)
-    local max_abbr_width = math.floor(win_width * ui.cmp.fixed_width) - 10
+    local max_abbr_width = ui.calculate_fixed_width_size(ui.cmp.fixed_width)
     if #item.abbr > max_abbr_width then
       fmt.abbr = vim.fn.strcharpart(item.abbr, 0, max_abbr_width - 3) .. "..."
     else
@@ -157,10 +155,8 @@ return {
       preselect = cmp.PreselectMode.None,
       completion = { completeopt = "menu,menuone,noselect" },
       sources = cmp.config.sources({
-        { name = "codeium" },
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
-        { name = "copilot" },
         { name = "buffer" },
         { name = "luasnip" },
         { name = "path" },
@@ -168,7 +164,6 @@ return {
         { name = "emoji" },
         { name = "treesitter" },
         { name = "crates" },
-        { name = "tmux" },
       }),
       window = {
         winhighlight = "Normal:NormalFloat,CursorLine:" .. ui.cmp.selected_background_color,

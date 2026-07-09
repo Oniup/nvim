@@ -29,24 +29,31 @@ M.dap = function()
   end, opts("Terminate dap session"))
 end
 
-M.lsp = function(client, bufnr)
+M.lsp_buffer_attach = function(client, bufnr)
   local function lsp_opts(desc)
     return { noremap = true, silent = true, buffer = bufnr, desc = desc }
   end
 
-  -- Buffer local mappings
-  map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
-  map("n", "K", vim.lsp.buf.hover, lsp_opts("Open hover info"))
-  map({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, lsp_opts("Code actions"))
-  map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("Format file"))
-  map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("Rename"))
-  map("n", "gd", "<CMD> Telescope lsp_definitions <CR>", lsp_opts("Goto definitions"))
-  map("n", "gi", "<CMD> Telescope lsp_implementations <CR>", lsp_opts("Goto implementations"))
-  map("n", "gt", "<CMD> Telescope lsp_type_definitions <CR>", lsp_opts("Goto type definitions"))
-  map("n", "<leader>lr", "<CMD> Telescope lsp_references <CR>", lsp_opts("List references"))
-  map("n", "gl", vim.diagnostic.open_float, lsp_opts("Open diagnostics hover info"))
-  map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("Go to next diagnostic"))
-  map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("Go to prev diagnostic"))
+  map("n", "K", vim.lsp.buf.hover, lsp_opts("LSP: Open hover info"))
+  map({ "n", "v" }, "<leader>a", vim.lsp.buf.code_action, lsp_opts("LSP: Code actions"))
+  map("n", "<leader>fo", vim.lsp.buf.format, lsp_opts("LSP: Format file"))
+  map("n", "<leader>re", vim.lsp.buf.rename, lsp_opts("LSP: Rename"))
+  map("n", "gd", "<CMD> Telescope lsp_definitions <CR>", lsp_opts("LSP: Goto definitions"))
+  map("n", "gi", "<CMD> Telescope lsp_implementations <CR>", lsp_opts("LSP: Goto implementations"))
+  map("n", "gt", "<CMD> Telescope lsp_type_definitions <CR>", lsp_opts("LSP: Goto type definition"))
+  map("n", "<leader>lr", "<CMD> Telescope lsp_references <CR>", lsp_opts("LSP: List references"))
+  map("n", "gl", vim.diagnostic.open_float, lsp_opts("LSP: Open diagnostics hover info"))
+  map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("LSP: Go to next diagnostic"))
+  map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("LSP: Go to prev diagnostic"))
+
+  -- Signature help
+  -- map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
+  -- vim.keymap.set(
+  --   { "n", "i" },
+  --   "<C-h>",
+  --   require("lsp_signature").toggle_floating_win,
+  --   opts("LSP: Toggle Signature")
+  -- )
 
   -- Format on save
   if client and client:supports_method("textDocument/formatting", { bufnr = bufnr }) then
@@ -79,7 +86,7 @@ M.lsp = function(client, bufnr)
         -- Open the resulting file
         vim.cmd.edit(vim.uri_to_fname(result))
       end, bufnr)
-    end, lsp_opts("Switch between source/header"))
+    end, lsp_opts("LSP: Switch between source/header"))
   end
 end
 
@@ -92,10 +99,11 @@ M.core = function()
   map("n", "<leader>nh", "<CMD> noh <CR>", opts("Hide search highlights"))
   map("t", "JK", "<C-\\><C-n>", opts("Exit insert mode"))
 
-  map("n", "<C-h>", "<C-w>h", opts("Window navigation"))
-  map("n", "<C-j>", "<C-w>j", opts("Window navigation"))
-  map("n", "<C-k>", "<C-w>k", opts("Window navigation"))
-  map("n", "<C-l>", "<C-w>l", opts("Window navigation"))
+  -- Starting to prefer default
+  -- map("n", "<C-h>", "<C-w>h", opts("Window navigation"))
+  -- map("n", "<C-j>", "<C-w>j", opts("Window navigation"))
+  -- map("n", "<C-k>", "<C-w>k", opts("Window navigation"))
+  -- map("n", "<C-l>", "<C-w>l", opts("Window navigation"))
 
   map("n", "<leader>sj", "<CMD> split <CR>", opts("Split window"))
   map("n", "<leader>sl", "<CMD> vsplit <CR>", opts("Split window"))

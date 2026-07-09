@@ -10,6 +10,9 @@ return {
       enable = true,
       update_root = false,
     },
+    git = {
+      enable = false,
+    },
     renderer = {
       root_folder_label = false,
       indent_width = 1,
@@ -27,15 +30,6 @@ return {
             empty_open = "󰷏",
             symlink = "󰉕",
             symlink_open = "󰉕",
-          },
-          git = {
-            unstaged = "",
-            staged = "",
-            unmerged = "󰘭",
-            renamed = "",
-            untracked = "",
-            deleted = "󰧧",
-            ignored = "",
           },
         },
       },

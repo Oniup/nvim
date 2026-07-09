@@ -11,7 +11,7 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "Issafalcon/lsp-overloads.nvim",
+    "ray-x/lsp_signature.nvim",
   },
   config = function()
     ui_set_popup_window()
@@ -56,13 +56,6 @@ return {
       capabilities = capabilities,
     })
 
-    require("lsp-overloads").setup({
-      ui = {
-        border = "none",
-        focusable = false,
-      },
-    })
-
     -- Load custom settings for specific servers using native vim.lsp.config
     for _, server_name in ipairs(servers) do
       local ok, custom_settings = pcall(require, "lsp_clients." .. server_name)
@@ -79,14 +72,23 @@ return {
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         local bufnr = ev.buf
-        local map = vim.keymap.set
-
-        local function lsp_opts(desc)
-          return { noremap = true, silent = true, buffer = bufnr, desc = desc }
-        end
 
         vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-        require("config.keymaps").lsp(client, bufnr)
+        require("config.keymaps").lsp_buffer_attach(client, bufnr)
+
+        require("lsp_signature").on_attach({
+          bind = true,
+          handler_opts = {
+            border = "none",
+          },
+          hint_prefix = {
+            above = "↙ ",
+            current = "↖ ",
+            below = "↖ ",
+          },
+          floating_window_above_cur_line = true,
+          padding = "",
+        }, bufnr)
       end,
     })
   end,

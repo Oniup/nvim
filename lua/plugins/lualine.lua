@@ -80,11 +80,11 @@ return {
     },
     extensions = {
       "lazy",
-      -- "mason",
-      -- "nvim-dap-ui",
+      "mason",
+      "nvim-dap-ui",
       "nvim-tree",
       "quickfix",
-      -- "toggleterm",
+      "toggleterm",
     },
-  }
+  },
 }

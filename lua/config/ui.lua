@@ -1,5 +1,11 @@
 local M = {}
 
+M.calculate_fixed_width_size = function(fixed_width)
+  -- https://github.com/hrsh7th/nvim-cmp/discussions/609#discussioncomment-5727678
+  local win_width = vim.api.nvim_win_get_width(0)
+  return math.floor(win_width * fixed_width) - 10
+end
+
 M.border = {
   style = "solid",
   chars = {
@@ -80,9 +86,9 @@ M.dapui = {
       size = 0.5,
       position = "left",
       elements = {
-        { id = "scopes",  size = 0.50 },
+        { id = "scopes", size = 0.50 },
         { id = "watches", size = 0.25 },
-        { id = "stacks",  size = 0.25 },
+        { id = "stacks", size = 0.25 },
       },
     },
     {

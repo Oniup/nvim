@@ -24,9 +24,9 @@ return {
     },
     -- Disabled due to a bug in neovide cutting and not rending next that passes
     -- a certain length:
-    sidebar_filetypes = {
-      NvimTree = true,
-    },
+    -- sidebar_filetypes = {
+    --   NvimTree = true,
+    -- },
     no_name_title = "[Empty]",
   },
 }
