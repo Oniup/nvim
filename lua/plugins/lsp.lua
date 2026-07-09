@@ -13,6 +13,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     "ray-x/lsp_signature.nvim",
     "stevearc/conform.nvim",
+    "stevearc/dressing.nvim",
   },
   config = function()
     ui_set_popup_window()
@@ -52,6 +53,11 @@ return {
         -- Other language formatters
         lua = { "stylua" },
         python = { "black" },
+      },
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
       },
     })
 
@@ -107,14 +113,6 @@ return {
           floating_window_above_cur_line = true,
           padding = "",
         }, bufnr)
-
-        -- Format on save
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          pattern = "*",
-          callback = function(args)
-            conform.format({ bufnr = args.buf })
-          end,
-        })
       end,
     })
   end,
