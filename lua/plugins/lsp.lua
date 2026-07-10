@@ -62,20 +62,8 @@ return {
     })
 
     -- Define capabilities and apply them globally to ALL servers
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem = {
-      documentationFormat = { "markdown", "plaintext" },
-      snippetSupport = true,
-      preselectSupport = true,
-      insertReplaceSupport = true,
-      labelDetailsSupport = true,
-      deprecatedSupport = true,
-      commitCharactersSupport = true,
-      tagSupport = { valueSet = { 1 } },
-      resolveSupport = {
-        properties = { "documentation", "additionalTextEdits", "detail" },
-      },
-    }
+    local capabilities = require("cmp_nvim_lsp").default_capabilities();
+    capabilities.textDocument.completion.completionItem.snippetSupport = false
     vim.lsp.config("*", { -- Applies to every language
       capabilities = capabilities,
     })
@@ -99,20 +87,6 @@ return {
 
         vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
         require("config.keymaps").lsp_buffer_attach(client, bufnr)
-
-        require("lsp_signature").on_attach({
-          bind = true,
-          handler_opts = {
-            border = "none",
-          },
-          hint_prefix = {
-            above = "↙ ",
-            current = "↖ ",
-            below = "↖ ",
-          },
-          floating_window_above_cur_line = true,
-          padding = "",
-        }, bufnr)
       end,
     })
   end,

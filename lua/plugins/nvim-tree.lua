@@ -13,6 +13,9 @@ return {
     git = {
       enable = false,
     },
+    filesystem_watchers = {
+      enable = false, -- Just press R to refresh the tree manually
+    },
     renderer = {
       root_folder_label = false,
       indent_width = 1,

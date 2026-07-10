@@ -5,17 +5,17 @@ if vim.g.neovide then
   -- Window
   vim.g.neovide_hide_mouse_when_typing = true
   vim.g.neovide_remember_window_size = true
-  vim.g.neovide_floating_blur_amount_x = 0
-  vim.g.neovide_floating_blur_amount_y = 0
+  vim.g.neovide_floating_blur_amount_x = 0.0
+  vim.g.neovide_floating_blur_amount_y = 0.0
 
   -- Animation
-  vim.g.neovide_position_animation_length = 0
-  vim.g.neovide_cursor_animation_length = 0.05
-  vim.g.neovide_scroll_animation_length = 0.1
-  vim.g.neovide_position_animation_length = 0.1
+  vim.g.neovide_position_animation_length = 0.0
+  vim.g.neovide_cursor_animation_length = 0.0
+  vim.g.neovide_scroll_animation_length = 0.05
+  vim.g.neovide_position_animation_length = 0.05
 
   -- Other
-  vim.o.guifont = "Hasklug Nerd Font:h15"
+  vim.o.guifont = "Hasklug Nerd Font:h14"
 end
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

@@ -47,7 +47,7 @@ M.lsp_buffer_attach = function(client, bufnr)
   map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("LSP: Go to prev diagnostic"))
 
   -- Signature help
-  -- map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
+  map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
   -- vim.keymap.set(
   --   { "n", "i" },
   --   "<C-h>",
@@ -110,8 +110,7 @@ M.core = function()
   -- File Tree And Projects
   --------------------------------------------------------------------------------------------------
   map("n", "<leader>e", "<CMD> NvimTreeToggle <CR>", opts("Toggle file explorer split"))
-
-  map("n", "C-S-P", "<CMD> NeovimLoadProject <CR>")
+  map("n", "<C-S-P>", "<CMD> NeovimLoadProject <CR>", opts("Load project"))
 
   -- Buffer Line
   --------------------------------------------------------------------------------------------------
@@ -150,6 +149,8 @@ M.core = function()
   --------------------------------------------------------------------------------------------------
   M.dap_init()
   map("n", "<C-S-P>", "<CMD> ProjectList <CR>", opts("Open project/session from list"))
+
+  map({ "v" }, "<C-S-C>", "<CMD> %s/;/{}\\r/g <CR>", opts("Replace ; with {}\\r, useful in C++"))
 end
 
 return M
