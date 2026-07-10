@@ -22,10 +22,14 @@ M.dap = function()
   map("n", "<F11>", dap.step_into, opts("Debug: Step Into"))
   map("n", "<F12>", dap.step_out, opts("Debug: Step Out"))
 
-  map("n", "<leader>de", dapui.eval, opts("Dap evaluation of variable under cursor"))
-  map("n", "<leader>dt", function()
-    dap.terminate()
-    dapui.close()
+  map("n", "<leader>be", dapui.eval, opts("Dap evaluation of variable under cursor"))
+  map("n", "<leader>bt", function()
+    dap.disconnect({ terminateDebuggee = true })
+
+    -- Wait a little for the process to actually detach before closing the UI to prevent race conditions
+    vim.defer_fn(function()
+      dapui.close()
+    end, 100)
   end, opts("Terminate dap session"))
 end
 
@@ -46,7 +50,7 @@ M.lsp_buffer_attach = function(client, bufnr)
   map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("LSP: Go to next diagnostic"))
   map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("LSP: Go to prev diagnostic"))
 
-  -- Signature help
+  -- Signature help library
   map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
   -- vim.keymap.set(
   --   { "n", "i" },
