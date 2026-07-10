@@ -50,6 +50,20 @@ return {
       pickers = {
         code_action = ui.telescope_themes.smaller_with_no_preview,
         builtin = ui.telescope_themes.smaller_with_no_preview,
+
+        -- Disables patters when requesting an lsp action
+        lsp_definitions = {
+          file_ignore_patterns = {},
+        },
+        lsp_references = {
+          file_ignore_patterns = {},
+        },
+        lsp_type_definitions = {
+          file_ignore_patterns = {},
+        },
+        lsp_type_implementations = {
+          file_ignore_patterns = {},
+        },
       },
     })
   end,
