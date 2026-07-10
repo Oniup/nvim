@@ -123,6 +123,7 @@ M.core = function()
   map("n", "<S-h>", "<CMD> BufferPrevious <CR>", opts("Goto previous buffer"))
   map("n", "<A-l>", "<CMD> BufferMoveNext <CR>", opts("Move buffer next"))
   map("n", "<A-h>", "<CMD> BufferMovePrevious <CR>", opts("Move buffer previous"))
+  map("t", "<C-q>", "<CMD> bd! <CR>", opts("Force close current buffer"))
 
   -- Fizzy Finder
   --------------------------------------------------------------------------------------------------
