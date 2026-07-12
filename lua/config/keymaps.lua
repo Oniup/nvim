@@ -52,31 +52,15 @@ M.lsp_buffer_attach = function(client, bufnr)
 
   -- Signature help library
   map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
-  -- vim.keymap.set(
-  --   { "n", "i" },
-  --   "<C-h>",
-  --   require("lsp_signature").toggle_floating_win,
-  --   opts("LSP: Toggle Signature")
-  -- )
+
 
   -- Client-specific mappings
   if client and client.name == "clangd" then
-    map("n", "<A-o>", function()
-      local params = { uri = vim.uri_from_bufnr(bufnr) }
-      -- Send the custom request to clangd
-      client:request("textDocument/switchSourceHeader", params, function(err, result)
-        if err then
-          print("Error switching files: " .. tostring(err.message))
-          return
-        end
-        if not result then
-          print("Corresponding file not found")
-          return
-        end
-        -- Open the resulting file
-        vim.cmd.edit(vim.uri_to_fname(result))
-      end, bufnr)
-    end, lsp_opts("LSP: Switch between source/header"))
+    map("n", "<A-o>", "<CMD> LspClangdSwitchSourceHeader <CR>",
+      lsp_opts("LSP: Switch between source/header"))
+
+    map("v", "<leader>rw", "<ESC><CMD>'<,'>s/;\\s*$/ {}\\r/<CR>",
+      lsp_opts("Replace ; with {}\\r, useful in C++"))
   end
 end
 
@@ -154,8 +138,6 @@ M.core = function()
   --------------------------------------------------------------------------------------------------
   M.dap_init()
   map("n", "<C-S-P>", "<CMD> ProjectList <CR>", opts("Open project/session from list"))
-
-  map({ "v" }, "<C-S-C>", "<CMD> %s/;/{}\\r/g <CR>", opts("Replace ; with {}\\r, useful in C++"))
 end
 
 return M

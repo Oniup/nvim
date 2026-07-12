@@ -53,7 +53,7 @@ local function has_words_before()
   if unpack then
     local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0
-      and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
   end
   return false
 end
@@ -106,21 +106,12 @@ return {
   dependencies = {
     "neovim/nvim-lspconfig",
     "L3MON4D3/LuaSnip",
-    -- {
-    --     "Exafunction/codeium.nvim",
-    --     dependencies = {
-    --         "nvim-lua/plenary.nvim",
-    --     },
-    --     config = true,
-    -- },
-
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lua",
     "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
+    -- "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
   },
-
   config = function()
     local cmp = require("cmp")
 
@@ -157,16 +148,15 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
-        { name = "buffer" },
-        { name = "luasnip" },
         { name = "path" },
-        { name = "calc" },
         { name = "emoji" },
-        { name = "treesitter" },
-        { name = "crates" },
+        -- { name = "buffer" },
+        -- { name = "luasnip" }
+        -- { name = "calc" },
+        -- { name = "treesitter" },
+        -- { name = "crates" },
       }),
       window = {
-        winhighlight = "Normal:NormalFloat,CursorLine:" .. ui.cmp.selected_background_color,
         completion = {
           scrollbar = false,
         },

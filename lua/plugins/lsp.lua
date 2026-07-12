@@ -51,6 +51,7 @@ return {
         comp = { "clang-format" },
 
         -- Other language formatters
+        markdown = { "prettier" },
         lua = { "stylua" },
         python = { "black" },
       },
@@ -60,7 +61,6 @@ return {
         lsp_format = "fallback",
       },
     })
-
     -- Define capabilities and apply them globally to ALL servers
     local capabilities = require("cmp_nvim_lsp").default_capabilities();
     capabilities.textDocument.completion.completionItem.snippetSupport = false
