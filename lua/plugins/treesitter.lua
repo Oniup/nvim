@@ -31,5 +31,5 @@ return {
             colorscheme ignite
         ]])
     end,
-  },
+  }
 }

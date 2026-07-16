@@ -32,6 +32,11 @@ return {
       "lua_ls",
       "neocmake",
       "clangd",
+      "glsl_analyzer",
+      "marksman",
+      -- Manually install these
+      -- "prettier",
+      -- "tree-sitter-cli",
     }
 
     -- Setup mason-lspconfig to ensure they are downloaded

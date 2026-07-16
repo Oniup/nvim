@@ -21,6 +21,8 @@ M.dap = function()
   map("n", "<F10>", dap.step_over, opts("Debug: Step Over"))
   map("n", "<F11>", dap.step_into, opts("Debug: Step Into"))
   map("n", "<F12>", dap.step_out, opts("Debug: Step Out"))
+  map("n", "<leader>dk", dap.up, opts("Debug: Move up the stack"))
+  map("n", "<leader>dj", dap.down, opts("Debug: Move down the stack"))
 
   map("n", "<leader>be", dapui.eval, opts("Dap evaluation of variable under cursor"))
   map("n", "<leader>bt", function()
@@ -47,8 +49,8 @@ M.lsp_buffer_attach = function(client, bufnr)
   map("n", "gt", "<CMD> Telescope lsp_type_definitions <CR>", lsp_opts("LSP: Goto type definition"))
   map("n", "<leader>lr", "<CMD> Telescope lsp_references <CR>", lsp_opts("LSP: List references"))
   map("n", "gl", vim.diagnostic.open_float, lsp_opts("LSP: Open diagnostics hover info"))
-  map("n", "<leader>gn", vim.diagnostic.goto_next, lsp_opts("LSP: Go to next diagnostic"))
-  map("n", "<leader>gp", vim.diagnostic.goto_prev, lsp_opts("LSP: Go to prev diagnostic"))
+  map("n", "<leader>gn", function() vim.diagnostic.jump({ count = 1 }) end, lsp_opts("LSP: Go to next diagnostic"))
+  map("n", "<leader>gp", function() vim.diagnostic.jump({ count = -1 }) end, lsp_opts("LSP: Go to prevhdiagnostic"))
 
   -- Signature help library
   map("i", "<C-h>", vim.lsp.buf.signature_help, lsp_opts("Signature Help"))
@@ -111,22 +113,22 @@ M.core = function()
 
   -- Fizzy Finder
   --------------------------------------------------------------------------------------------------
-  map("n", "<leader>fi", "<CMD> Telescope find_files <CR>", opts("Find Files"))
-  map("n", "<leader>fg", "<CMD> Telescope live_grep <CR>", opts("Project live grep"))
-  map("n", "<leader>fh", "<CMD> Telescope help_tags <CR>", opts("Find vim help tag"))
-  map("n", "<leader>fa", "<CMD> Telescope builtin <CR>", opts("All telescope builtin functions"))
-  map("n", "<C-S-M>", "<CMD> Telescope diagnostics <CR>", opts("List project wide diagnostics"))
+  map("n", "<leader>fi", "<CMD> Telescope find_files <CR>", opts("Telescope: Find Files"))
+  map("n", "<leader>fg", "<CMD> Telescope live_grep <CR>", opts("Telescope: Project live grep"))
+  map("n", "<leader>fh", "<CMD> Telescope help_tags <CR>", opts("Telescope: Find vim help tag"))
+  map("n", "<leader>fa", "<CMD> Telescope builtin <CR>", opts("Telescope: All telescope builtin functions"))
+  map("n", "<leader>ml", "<CMD> Telescope diagnostics <CR>", opts("List project wide diagnostics"))
   map(
     "n",
     "<leader>fl",
     "<CMD> Telescope find_files follow=true no_ignore=true hidden=true  <CR>",
-    opts("Find all")
+    opts("Telescope: Find all")
   )
   map(
     "n",
     "<leader>fs",
     "<CMD> Telescope current_buffer_fuzzy_find <CR>",
-    opts("Find in current buf")
+    opts("Telescope: Find in current buf")
   )
 
   -- Git signs
