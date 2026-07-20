@@ -84,11 +84,28 @@ return {
       vim.lsp.enable(server_name)
     end
 
+    -- stop annoying removing indentation when typing ':', mainly when typing 'ClassName::...'
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "*",
+      callback = function(_)
+        vim.opt_local.cinkeys:remove(":")
+        vim.opt_local.indentkeys:remove(":")
+      end
+    })
+
     vim.api.nvim_create_autocmd("LspAttach", {
       group = vim.api.nvim_create_augroup("UserLspConfig", {}),
       callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         local bufnr = ev.buf
+        if client == nil then
+          error("Failed to get client from env.data.client_id " + ev.data.client_id + " for current buffer, ID: " +
+            ev.buf)
+          return
+        end
+
+        -- Disable auto formatting while typing, pressing ':' making doing some things in C++ annoying with the auto formatting
+        client.server_capabilities.documentFormattingProvider = false
 
         vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
         require("config.keymaps").lsp_buffer_attach(client, bufnr)
